@@ -1,0 +1,14 @@
+.loader {
+	position: sticky;
+	left: calc(50% - 150px);
+	width: 100%;
+	height: 100%;
+	max-width: 300px;
+	max-height: 300px;
+	margin-top: 5vh;
+
+	&__cat {
+		width: 100%;
+		height: 100%;
+	}
+}

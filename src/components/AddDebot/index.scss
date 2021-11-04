@@ -1,0 +1,49 @@
+@import '../../styles/colors.scss';
+@import '../../styles/mixins.scss';
+@import '../../styles/size.scss';
+
+.add-debot {
+	padding: 12px 14px;
+
+	&__horizontal-inputs {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		width: 100%;
+
+		.options-list {
+			margin-bottom: 20px;
+			margin-left: 6px;
+		}
+
+		@media(max-width: #{$extra-min-checkpoint}) {
+			flex-direction: column;
+			align-items: flex-start;
+
+			.options-list {
+				margin-left: 0;
+			}
+		}
+	}
+
+	&__submit-button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 36px;
+		font-weight: 600;
+		font-size: 16px;
+		color: $white;
+		border-radius: 12px;
+		background-color: $dark-green;
+		user-select: none;
+		
+		@include light-button-effects($dark-green, $white);
+	}
+
+	.stage-component__input {
+		&:last-child {
+			margin-bottom: 20px;
+		}
+	}
+}

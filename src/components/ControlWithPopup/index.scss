@@ -1,0 +1,91 @@
+@import '../../styles/colors.scss';
+@import '../../styles/size.scss';
+
+.control-with-popup {
+	position: relative;
+	height: max-content;
+	margin-right: 20px;
+
+	&__label {
+		font-weight: 600;
+		font-size: 18px;
+		color: $blue;
+		cursor: pointer;
+		transition: color .2s;
+		user-select: none;
+
+		&:hover {
+			color: $light-blue;
+		}
+	}
+
+	&--active {
+		.control-with-popup__label {
+			color: $dark-blue;
+
+			&:hover {
+				color: $dark-blue;
+			}
+		}
+	}
+
+	&:last-child {
+		margin-right: 0;
+	}
+
+	@media(max-width: 770px) {
+		.control-with-popup__container {
+			position: fixed;
+			top: calc(#{$app-top-padding} + #{$header-height} + #{$header-margin} + #{$debot-page-controls-height} + #{$debot-page-controls-margin});
+			right: 20px;
+			max-width: 600px;
+		}
+	}
+
+
+	@media(max-width: #{$min-checkpoint}) {
+		width: 100%;
+		min-width: 100%;
+
+		.control-with-popup__container {
+			position: absolute;
+			top: 30px;
+			right: auto;
+			left: -50px;
+			width: calc(100% + 100px);
+		}
+	}
+
+	@media (max-width: #{$extra-min-checkpoint}) {
+		.control-with-popup__container {
+			left: -10px;
+			width: calc(100% + 20px);
+		}
+	}
+
+	&__container {
+		--height: 252px;
+		--width: 460px;
+		position: absolute;
+		z-index: 10;
+		visibility: hidden;
+		opacity: 0;
+		right: 0;
+		top: 30px;
+		height: max-content;
+		max-height: var(--height);
+		width: var(--width);
+		background-color: $white;
+		border-radius: 10px;
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+		transition: opacity .2s, top .2s;
+		overflow: auto;
+		cursor: default;
+
+		&--visible {
+			visibility: visible;
+			opacity: 1;
+			top: 38px;
+		}
+	}
+}

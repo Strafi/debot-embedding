@@ -1,0 +1,48 @@
+@import '../../styles/size.scss';
+@import '../../styles/colors.scss';
+
+.debot-page {
+	&--scroll-disabled {
+		max-height: 100vh;
+		overflow-y: hidden;
+	}
+
+	&__controls {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		width: 100%;
+		height: $debot-page-controls-height;
+		margin-bottom: $debot-page-controls-margin;
+
+		@media(max-width: #{$min-checkpoint}) {
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: space-between;
+			height: $debot-page-controls-height-min;
+			margin-bottom: $debot-page-controls-margin-min;
+		}
+	}
+
+	&__controls-item {
+		height: max-content;
+		margin-right: 20px;
+		font-weight: 600;
+		font-size: 18px;
+		color: $blue;
+		cursor: pointer;
+		transition: color .2s;
+
+		&:hover {
+			color: $light-blue;
+		}
+
+		&:active {
+			color: $dark-blue;
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}

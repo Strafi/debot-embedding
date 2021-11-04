@@ -1,0 +1,114 @@
+@import './colors.scss';
+
+@mixin link-effects($color) {
+	transition: color .2s;
+	text-decoration: underline;
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+		color: darken($color, 15%);
+	}
+
+	&:active {
+		color: darken($color, 20%);
+	}
+}
+
+@mixin link-effects-border($color) {
+	transition: color .2s, border-color .2s;
+	border-bottom: 1px solid $color;
+	cursor: pointer;
+
+	&:hover {
+		border-color: darken($color, 15%);
+		color: darken($color, 15%);
+	}
+
+	&:active {
+		border-color: darken($color, 20%);
+		color: darken($color, 20%);
+	}
+}
+
+@mixin button-effects($background-color, $color) {
+	transition: background-color .2s, color .2s;
+	cursor: pointer;
+
+	&:hover {
+		color: darken($color, 7%);
+		background-color: darken($background-color, 7%);
+	}
+
+	&:active {
+		color: darken($color, 10%);
+		background-color: darken($background-color, 10%);
+	}
+}
+
+@mixin light-button-effects($background-color, $color) {
+	transition: background-color .2s, color .2s;
+	cursor: pointer;
+
+	&:hover {
+		color: darken($color, 4%);
+		background-color: darken($background-color, 4%);
+	}
+
+	&:active {
+		color: darken($color, 6%);
+		background-color: darken($background-color, 7%);
+	}
+}
+
+@mixin bordered-button($color, $activeColor) {
+	color: $color;
+	border: 1px solid $color;
+	border-radius: 8px;
+	background-color: $activeColor;
+	cursor: pointer;
+	transition: color .2s, background-color .2s;
+
+	&:hover {
+		color: $activeColor;
+		background-color: $color;
+	}
+}
+
+@mixin cancel-button-effects($color: $cancel-color, $propery: 'stroke') {
+	cursor: pointer;
+
+	path {
+		transition: #{$propery} .2s;
+	}
+
+	&:hover {
+		path {
+			#{$propery}: darken($color, 15%);
+		}
+	}
+
+	&:active {
+		path {
+			#{$propery}: darken($color, 20%);
+		}
+	}
+}
+
+@mixin custom-scroll-bar {
+	scrollbar-width: thin;
+			
+	&::-webkit-scrollbar {
+		width: 6px;
+		height: 10px;
+		border-radius: 3px;
+		-webkit-box-shadow: inset 0 0 12px rgba(0, 0, 0, .1);
+		box-shadow: inset 0 0 12px rgba(0, 0, 0, .1);
+	}
+	
+	&::-webkit-scrollbar-thumb {
+		border-radius: 3px;
+		-webkit-box-shadow: inset 0 0 12px rgba(0, 0, 0, .35);
+		box-shadow: inset 0 0 12px rgba(0, 0, 0, .35);
+	}
+}

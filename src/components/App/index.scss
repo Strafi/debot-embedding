@@ -1,0 +1,26 @@
+@import '../../styles/size.scss';
+
+.app-container {
+	position: relative;
+	width: 100%;
+	min-height: 100vh;
+	padding: $app-top-padding 60px;
+	overflow-x: hidden;
+
+	@media (max-width: #{$min-checkpoint}) {
+		padding: $app-top-padding 60px $app-bottom-padding-min;
+	}
+
+	@media (max-width: #{$extra-min-checkpoint}) {
+		padding: $app-top-padding 20px $app-bottom-padding-min;
+	}
+
+	&__flex-wrapper {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		width: 100%;
+		max-width: $main-wrapper-max-width;
+		margin: 0 auto;
+	}
+}

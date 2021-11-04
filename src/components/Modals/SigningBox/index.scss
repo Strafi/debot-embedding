@@ -1,0 +1,156 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/size.scss';
+@import '../../../styles/mixins.scss';
+
+.signing-box {
+	position: fixed;
+	z-index: 100;
+	left: 0;
+	top: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.66);
+
+	&__header {
+		width: 100%;
+		margin-bottom: 16px;
+		text-align: center;
+		font-size: 30px;
+		font-weight: 700;
+		color: $dark-black;
+	}
+
+	&__description {
+		margin-bottom: 20px;
+		font-size: 24px;
+		color: $dark-black;
+	}
+
+	&__container {
+		position: relative;
+		width: 90%;
+		height: 90%;
+		max-width: 640px;
+		max-height: 600px;
+		padding: 15px 20px 10px;
+		background: $white;
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		border-radius: 12px;
+		overflow: auto;
+
+		@media(max-width: 640px) {
+			width: 100%;
+			height: 100%;
+			max-height: 100%;
+			max-width: 100%;
+			padding: 15px 2% 10px;
+			border-radius: 0px;
+		}
+	}
+
+	&__input{
+		height: 70px;
+		width: 100%;
+		margin-bottom: 4px;
+		color: $grey;
+		font-size: 18px;
+		outline: none;
+		transition: color .2s;
+		border: none;
+		resize: none;
+		border-bottom: 1px solid $grey;
+		background: $light-grey;
+
+		&:not(.signing-box__input--error):focus {
+			color: $dark-blue;
+			border-color: $dark-blue;
+		}
+
+		&--error {
+			color: $red;
+			border-color: $red;
+
+			&::placeholder {
+				color: $red;
+			}
+		}
+
+		&-container {
+			width: 100%;
+			margin-bottom: 50px;
+		}
+
+		&-label {
+			margin-bottom: 12px;
+			font-size: 20px;
+		}
+
+		&-error {
+			font-size: 14px;
+			color: $red;
+		}
+	}
+
+	&__devider {
+		width: 100%;
+		margin-bottom: 40px;
+		text-align: center;
+		font-size: 24px;
+		font-weight: 700;
+		color: $dark-black;
+	}
+
+	&__upload-keys {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: 200px;
+		border-radius: 8px;
+		background-color: $white;
+		overflow: hidden;
+
+		&-dropable-overlay {
+			position: absolute;
+			z-index: -1;
+			width: 100%;
+			height: 100%;
+
+			&--active {
+				z-index: 10;
+				background-color: rgba($light-blue, 0.2);
+			}
+		}
+
+		label {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: max-content;
+			height: max-content;
+			margin-top: 10px;
+			font-size: 18px;
+			font-weight: 700;
+			cursor: pointer;
+
+			img {
+				width: 90%;
+				height: 90%;
+				max-width: 130px;
+				max-height: 130px;
+				margin-left: 5px;
+				margin-bottom: 10px;
+			}
+		}
+
+		&--error {
+			height: 20px;
+			font-size: 14px;
+			font-weight: 700;
+			color: $red;
+		}
+	}
+}

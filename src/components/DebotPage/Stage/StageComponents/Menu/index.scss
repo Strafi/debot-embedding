@@ -1,0 +1,59 @@
+@import '../../../../../styles/colors.scss';
+
+.stage-component {
+	&__menu-container {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 12px;
+	}
+
+	&__menu-title {
+		margin-bottom: 6px;
+		font-size: 20px;
+		font-weight: 600;
+		word-break: break-word;
+	}
+
+	&__menu-description {
+		margin-bottom: 6px;
+		font-size: 18px;
+		word-break: break-word;
+	}
+
+	&__menu-error {
+		margin-top: 4px;
+		font-size: 14px;
+		color: $red;
+	}
+
+	&__menu-list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__menu-item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 36px;
+		margin-bottom: 6px;
+		font-weight: 600;
+		font-size: 16px;
+		color: $dark-blue;
+		border: 1px solid $dark-blue;
+		border-radius: 8px;
+		background-color: $white;
+		user-select: none;
+		cursor: pointer;
+		transition: color .2s, background-color .2s;
+
+		&:hover {
+			color: $white;
+			background-color: $dark-blue;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
