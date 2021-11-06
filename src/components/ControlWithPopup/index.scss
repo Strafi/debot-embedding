@@ -36,7 +36,7 @@
 	@media(max-width: 770px) {
 		.control-with-popup__container {
 			position: fixed;
-			top: calc(#{$app-top-padding} + #{$header-height} + #{$header-margin} + #{$debot-page-controls-height} + #{$debot-page-controls-margin});
+			top: calc(#{$app-top-padding} + #{$header-height} + #{$header-margin} + #{$debot-controls-height} + #{$debot-controls-margin});
 			right: 20px;
 			max-width: 600px;
 		}

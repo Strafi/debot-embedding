@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react';
-import tonClientController from '/src/tonClient';
+import tonClientController from '/src/TonClient';
 import { addLocalDebot } from '/src/helpers';
 import { ControlWithPopupContext } from '/src/contexts';
 import { OptionsList } from '/src/components';

@@ -1689,6 +1689,11 @@ react-router@5.2.1:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
+react-to-webcomponent@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/react-to-webcomponent/-/react-to-webcomponent-1.5.1.tgz#dbb7e497edc1520903dd48f8e2e87d9cf16ef768"
+  integrity sha512-tkPs6cINZSdH76nf0oaUf7ZPARgw/v6vurECavH1yzv8Rt52PeFrbKbGlwxjf2CPEoB/bXOaAHry+GKl4ZcpNw==
+
 react@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"

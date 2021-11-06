@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 
-import tonClientController from '/src/tonClient';
+import tonClientController from '/src/TonClient';
 import {  MainNetIcon, DevNetIcon, FldNetIcon, NetworkIcon } from '/src/components/icons';
 import { OptionsList } from '/src/components';
 import { MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK } from '/src/constants';

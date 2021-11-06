@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ConfirmInput } from '/src/components/DebotPage/Stage/StageComponents';
+import { ConfirmInput } from '/src/components/Debot/Stage/StageComponents';
 import { createExplorerUrl } from '/src/helpers';
 import './index.scss';
 

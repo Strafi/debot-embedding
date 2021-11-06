@@ -1,0 +1,61 @@
+@import '../../../../../styles/colors.scss';
+@import '../../../../../styles/mixins.scss';
+
+.stage-component {
+	&__input {
+		@include base-input;
+	}
+
+	&__input-container {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__input-label {
+		margin-bottom: 6px;
+		font-size: 20px;
+		font-weight: 600;
+		word-break: break-word;
+	}
+
+	&__input-error {
+		margin-top: 4px;
+		font-size: 14px;
+		color: $red;
+		word-break: break-word;
+	}
+
+	&__input-description {
+		margin-bottom: 6px;
+		font-size: 18px;
+		word-break: break-word;
+	}
+
+	&__input-flex {
+		display: flex;
+
+		.stage-component__input {
+			margin-right: 4px;
+		}
+
+		&:last-child {
+			margin-bottom: 20px;
+		}
+	}
+
+	&__input-send-button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 40px;
+		width: 140px;
+		font-weight: 600;
+		font-size: 16px;
+		color: $white;
+		border-radius: 6px;
+		background-color: $dark-green;
+		user-select: none;
+		
+		@include light-button-effects($dark-green, $white);
+	}
+}

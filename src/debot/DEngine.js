@@ -2,7 +2,7 @@ import { DebotModule } from '@tonclient/core';
 
 import store from '/src/store';
 import WalletService from '/src/WalletService';
-import tonClientController from '/src/tonClient';
+import tonClientController from '/src/TonClient';
 import { formDebotFunctionFromId } from '/src/helpers';
 import { COMPONENTS_BINDINGS, DEV_NETWORK, FLD_NETWORK } from '/src/constants';
 import { pushItemToStage, clearStage, setApproveWindow, setSigningBox } from '/src/store/actions/debot';

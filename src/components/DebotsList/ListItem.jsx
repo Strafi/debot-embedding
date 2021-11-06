@@ -1,5 +1,5 @@
 import React from 'react';
-import tonClientController from '/src/tonClient';
+import tonClientController from '/src/TonClient';
 import { Link } from 'react-router-dom';
 import { createDebotUrl } from '/src/helpers';
 import { NetworkIcon } from '/src/components/icons';

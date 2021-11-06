@@ -1,4 +1,4 @@
-import tonClientController from '/src/tonClient';
+import tonClientController from '/src/TonClient';
 
 class BaseInterface {
 	constructor(id, abi) {

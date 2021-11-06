@@ -1,6 +1,6 @@
 {
-  "name": "debot_browser",
-  "version": "2.0.0",
+  "name": "debot-browser-web-components",
+  "version": "1.0.0",
   "private": false,
   "dependencies": {
     "@tonclient/core": "^1.24.0",
@@ -10,28 +10,16 @@
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
+    "react-to-webcomponent": "^1.5.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0",
-    "ton-inpage-provider": "0.1.18",
-    "web-vitals": "^1.0.1",
-    "workbox-background-sync": "^5.1.3",
-    "workbox-broadcast-update": "^5.1.3",
-    "workbox-cacheable-response": "^5.1.3",
-    "workbox-core": "^5.1.3",
-    "workbox-expiration": "^5.1.3",
-    "workbox-google-analytics": "^5.1.3",
-    "workbox-navigation-preload": "^5.1.3",
-    "workbox-precaching": "^5.1.3",
-    "workbox-range-requests": "^5.1.3",
-    "workbox-routing": "^5.1.3",
-    "workbox-strategies": "^5.1.3",
-    "workbox-streams": "^5.1.3"
+    "ton-inpage-provider": "0.1.18"
   },
   "scripts": {
     "start": "vite",
     "serve": "vite preview",
-    "build": "VITE_NODE_ENV=production vite build"
+    "build": "VITE_NODE_ENV=production vite build",
+	"update-wasm": "cp ./node_modules/@tonclient/lib-web/tonclient.wasm public"
   },
   "browserslist": {
     "production": [
@@ -47,9 +35,9 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react-refresh": "^1.3.1",
-    "sass": "^1.43.3",
-	"eslint": "^8.1.0",
+    "eslint": "^8.1.0",
     "eslint-plugin-react": "^7.26.1",
+    "sass": "^1.43.3",
     "vite": "^2.3.2",
     "vite-plugin-svgr": "^0.3.0"
   }

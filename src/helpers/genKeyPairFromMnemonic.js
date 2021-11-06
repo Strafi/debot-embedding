@@ -1,4 +1,4 @@
-import tonClientController from '/src/tonClient';
+import tonClientController from '/src/TonClient';
 import { MNEMONIC_WORD_COUNT, DERIVATION_PATH } from '/src/constants';
 
 async function genKeyPairFromMnemonic(mnemonic) {

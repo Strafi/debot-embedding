@@ -1,6 +1,6 @@
 import store from '/src/store';
 import WalletService from '/src/WalletService';
-import tonClientController from '/src/tonClient';
+import tonClientController from '/src/TonClient';
 import { DEngine } from '/src/debot';
 import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
 import { pushItemToStage } from '/src/store/actions/debot';

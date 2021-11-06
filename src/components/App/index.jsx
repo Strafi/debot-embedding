@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import WalletService from '/src/WalletService';
-import { Header, DebotsList, DebotPage, ConnectWallet } from '/src/components';
+import { Header, ConnectWallet } from '/src/components';
 import { setWallet } from '/src/store/actions/account';
 import './index.scss';
 
-const App = () => {
+const App = ({ children, headerParams }) => {
 	const dispatch = useDispatch();
 	const isConnectWalletModalVisible = useSelector(state => !!state.account.connectWalletModal);
 	const wallet = useSelector(state => !!state.account.wallet);
@@ -29,12 +28,9 @@ const App = () => {
 
 	return (
 		<div className='app-container'>
-			<Header />
+			<Header headerParams={headerParams} />
 			<div className='app-container__flex-wrapper'>
-				<Switch>
-					<Route exact path='/' component={DebotsList} />
-					<Route path='/debot' component={DebotPage} />
-				</Switch>
+				{children}
 				{isConnectWalletModalVisible && !wallet && <ConnectWallet />}
 			</div>
 		</div>

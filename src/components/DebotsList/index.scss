@@ -10,8 +10,8 @@
 		justify-content: flex-end;
 		align-items: center;
 		width: 100%;
-		height: $debot-page-controls-height;
-		margin-bottom: $debot-page-controls-margin;
+		height: $debot-controls-height;
+		margin-bottom: $debot-controls-margin;
 
 		@media(max-width: #{$min-checkpoint}) {
 			flex-direction: column;
