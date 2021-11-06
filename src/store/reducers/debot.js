@@ -5,6 +5,7 @@ import {
 	SET_APPROVE_WINDOW,
 	SET_DEBOTS_FILTER_KEY,
 	SET_LOCAL_DEBOTS_LIST,
+	SET_IS_DEBOT_ERROR,
 } from '../actions/debot';
 import { USER_DEBOTS_LS_FIELD, MAIN_NETWORK } from '/src/constants';
 
@@ -19,6 +20,7 @@ const initialState = {
 		{ title: 'Multisig', address: '0:c69a0ed4a11b467ec1a981f29139dc3ff6af47eeacd2cd93e67a6cfc6f771cfb', network: MAIN_NETWORK },
 	],
 	localDebotsList: JSON.parse(localStorage.getItem(USER_DEBOTS_LS_FIELD)) || [],
+	isDebotError: false,
 }
   
 function reducer(state = initialState, action) {
@@ -38,6 +40,7 @@ function reducer(state = initialState, action) {
 			return {
 				...state,
 				stage: [],
+				isDebotError: false,
 			}
 		}
 
@@ -68,6 +71,13 @@ function reducer(state = initialState, action) {
 			return {
 				...state,
 				localDebotsList: payload,
+			}
+		}
+
+		case SET_IS_DEBOT_ERROR: {
+			return {
+				...state,
+				isDebotError: payload,
 			}
 		}
 

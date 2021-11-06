@@ -3,32 +3,7 @@
 
 .stage-component {
 	&__input {
-		height: 40px;
-		width: 100%;
-		padding: 10px 17px;
-		font-size: 16px;
-		font-weight: 500;
-		color: $black;
-		border: 1px solid $table-input-color;
-		border-radius: 6px;
-		outline: none;
-
-		&:focus {
-			border-color: $dark-blue;
-		}
-		
-		&--error {
-			border-color: $red;
-			color: $red;
-
-			&::placeholder {
-				color: $red;
-			}
-
-			&:focus {
-				border-color: $red;
-			}
-		}
+		@include base-input;
 	}
 
 	&__input-container {

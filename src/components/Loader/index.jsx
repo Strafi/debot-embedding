@@ -7,7 +7,7 @@ const Loader = ({ isFailed }) => {
 
 	return (
 		<div className='loader'>
-			<img className='loader__cat' src={imgSrc} alt={imgAlt} />
+			<img className='loader__content' src={imgSrc} alt={imgAlt} />
 		</div>
 	);
 }

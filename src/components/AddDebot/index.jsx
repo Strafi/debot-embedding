@@ -57,10 +57,10 @@ const AddDebot = ({ prefilledAddress = '' }) => {
 	return (
 		<div className='add-debot'>
 			<div className='add-debot__horizontal-inputs'>
-				<div className='stage-component__input-container'>
-					<span className='stage-component__input-label'>DeBot name</span>
+				<div className='add-debot__input-container'>
+					<span className='add-debot__input-label'>DeBot name</span>
 					<input
-						className='stage-component__input'
+						className='add-debot__input'
 						type='text'
 						placeholder='Enter...'
 						value={debotName}
@@ -91,10 +91,10 @@ const AddDebot = ({ prefilledAddress = '' }) => {
 					</div>
 				</OptionsList>
 			</div>
-			<div className='stage-component__input-container'>
-				<span className='stage-component__input-label'>DeBot address</span>
+			<div className='add-debot__input-container'>
+				<span className='add-debot__input-label'>DeBot address</span>
 				<input
-					className='stage-component__input'
+					className='add-debot__input'
 					type='text'
 					placeholder='Enter...'
 					value={debotAddress}

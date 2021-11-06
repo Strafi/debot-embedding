@@ -71,6 +71,6 @@ class Stage extends Component {
 	}
 }
 
-const mapStateToProps = ({ debot: { stage } }) => ({ stage });
+const mapStateToProps = ({ debot: { stage, isDebotError } }) => ({ stage, isDebotError });
 
 export default connect(mapStateToProps)(Stage);

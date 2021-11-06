@@ -82,7 +82,7 @@ const Environment = () => {
 						<div className='environment__image--flex-container'>
 							<img src='/env-icon.svg' alt='Environment'/>
 							<div className='environment__image-text'>
-								You can access stored data as variables in inputs by adding the '$' prefix to key, or copy data to the clipboard by click on it.
+								You can access stored data as variables in inputs by adding the &apos;$&apos; prefix to key, or copy data to the clipboard by click on it.
 							</div>
 						</div>
 						<div className='environment__image-text environment__image-text--warning'>
@@ -93,7 +93,7 @@ const Environment = () => {
 			</div>
 			<div className='environment__input-container'>
 				<input
-					className='stage-component__input'
+					className='environment__input'
 					type='text'
 					placeholder='Key'
 					value={envKey}
@@ -101,7 +101,7 @@ const Environment = () => {
 				/>
 				<span className='environment__divider'>:</span>
 				<input
-					className='stage-component__input'
+					className='environment__input'
 					type='text'
 					placeholder='Value'
 					value={envValue}

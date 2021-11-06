@@ -20,6 +20,10 @@
 		}
 	}
 
+	&__input {
+		@include base-input;
+	}
+
 	&__divider {
 		display: flex;
 		justify-content: center;
