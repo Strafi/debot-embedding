@@ -1,3 +1,8 @@
+## TO DOs  
+Custom components bindings
+Event emmiter
+Check css (if it is easy to style)
+
 ## How To Run
 If you don't want (or can not) to install the software mentioned below, you can access the pre-build DeBot browser by this link: https://freeton-stats.org/browser/.
 

@@ -7,7 +7,7 @@ import { setDebotsFilterKey } from '/src/store/actions/debot';
 import { LensIcon } from '/src/components/icons';
 import './index.scss';
 
-const SearchBar = () => {
+const SearchBar = ({ isDebotOnly }) => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [inputValue, setInputValue] = useState('');
@@ -16,7 +16,8 @@ const SearchBar = () => {
 		const isValidAddress = await checkIsValidAddress(inputValue);
 
 		if (isValidAddress) {
-			const debotUrl = createDebotUrl(inputValue);
+			const debotUrlSlug = isDebotOnly ? '/' : '/debot';
+			const debotUrl = createDebotUrl(inputValue, debotUrlSlug);
 			dispatch(setDebotsFilterKey(''));
 
 			return history.push(debotUrl);

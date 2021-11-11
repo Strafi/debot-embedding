@@ -4,10 +4,14 @@ import PropTypes from 'prop-types';
 
 import store from '/src/store';
 import { App, Debot } from '/src/components';
+import HeaderParamsContext from '/src/contexts/HeaderParamsContext';
+import DebotParamsContext from '/src/contexts/DebotParamsContext';
 
 class StandaloneDebot extends Component {
 	render() {
-		console.log(this.props);
+		const { hideenv, hiderestart, debotaddress } = this.props;
+		const isHideEnv = hideenv === 'true';
+		const isHideRestart = hiderestart === 'true';
 
 		const headerParams = {
 			hideBackButton: true,
@@ -15,11 +19,21 @@ class StandaloneDebot extends Component {
 			hideSearchBar: true,
 		}
 
+		const debotParams = {
+			hideEnv: isHideEnv,
+			hideRestart: isHideRestart,
+			hideSave: true,
+		}
+
 		return (
 			<Provider store={store}>
-				<App headerParams={headerParams}>
-					<Debot address={this.props.debotaddress} />
-				</App>
+				<HeaderParamsContext.Provider value={headerParams}>
+					<DebotParamsContext.Provider value={debotParams}>
+						<App>
+							<Debot address={debotaddress} />
+						</App>
+					</DebotParamsContext.Provider>
+				</HeaderParamsContext.Provider>
 			</Provider>
 		);
 	}
@@ -27,6 +41,8 @@ class StandaloneDebot extends Component {
 
 StandaloneDebot.propTypes = {
 	debotaddress: PropTypes.string.isRequired,
+	hideenv: PropTypes.string,
+	hiderestart: PropTypes.string,
 }
 
 export default StandaloneDebot;

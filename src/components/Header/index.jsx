@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+import HeaderParamsContext from '/src/contexts/HeaderParamsContext';
+import DebotOnlyContext from '/src/contexts/DebotOnlyContext';
 import SearchBar from '../SearchBar';
 import HeaderNetworkSelector from './NetworkSelector';
 import HeaderAccount from './Account';
@@ -13,7 +15,9 @@ const defaultParams = {
 	hideAccount: false,
 };
 
-const Header = ({ headerParams }) => {
+const Header = () => {
+	const isDebotOnly = useContext(DebotOnlyContext);
+	const headerParams = useContext(HeaderParamsContext);
 	const hideBackButton = headerParams?.hideBackButton || defaultParams.hideBackButton;
 	const hideSearchBar = headerParams?.hideSearchBar || defaultParams.hideSearchBar;
 	const hideNetworkSelector = headerParams?.hideNetworkSelector || defaultParams.hideNetworkSelector;
@@ -22,7 +26,7 @@ const Header = ({ headerParams }) => {
 	return (
 		<header className='header-container'>
 			{!hideBackButton && <HeaderBackButton /> }
-			{!hideSearchBar && <SearchBar /> }
+			{!hideSearchBar && <SearchBar isDebotOnly={isDebotOnly} /> }
 			<div className='header-container__settings-bar'>
 				{!hideNetworkSelector && <HeaderNetworkSelector />}
 				{!hideAccount && <HeaderAccount />}
