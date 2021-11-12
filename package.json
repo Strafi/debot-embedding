@@ -13,13 +13,14 @@
     "react-to-webcomponent": "^1.5.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "ton-inpage-provider": "0.1.18"
+    "ton-inpage-provider": "0.1.18",
+    "typescript": "^4.4.4"
   },
   "scripts": {
     "start": "vite",
     "serve": "vite preview",
-    "build": "VITE_NODE_ENV=production vite build",
-	"update-wasm": "cp ./node_modules/@tonclient/lib-web/tonclient.wasm public"
+    "build": "tsc && VITE_NODE_ENV=production vite build",
+    "update-wasm": "cp ./node_modules/@tonclient/lib-web/tonclient.wasm public"
   },
   "browserslist": {
     "production": [
@@ -34,6 +35,12 @@
     ]
   },
   "devDependencies": {
+    "@types/node": "^16.11.7",
+    "@types/react": "^17.0.34",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-redux": "^7.1.20",
+    "@types/react-router-dom": "^5.3.2",
+    "@types/redux": "^3.6.0",
     "@vitejs/plugin-react-refresh": "^1.3.1",
     "eslint": "^8.1.0",
     "eslint-plugin-react": "^7.26.1",
