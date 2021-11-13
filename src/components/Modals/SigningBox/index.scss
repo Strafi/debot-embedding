@@ -3,16 +3,25 @@
 @import '../../../styles/mixins.scss';
 
 .signing-box {
-	position: fixed;
-	z-index: 100;
-	left: 0;
-	top: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.66);
+	position: relative;
+	width: 90%;
+	height: 90%;
+	max-width: 640px;
+	max-height: 600px;
+	padding: 15px 20px 10px;
+	background: $white;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 12px;
+	overflow: auto;
+
+	@media(max-width: 640px) {
+		width: 100%;
+		height: 100%;
+		max-height: 100%;
+		max-width: 100%;
+		padding: 15px 2% 10px;
+		border-radius: 0px;
+	}
 
 	&__header {
 		width: 100%;
@@ -27,28 +36,6 @@
 		margin-bottom: 20px;
 		font-size: 24px;
 		color: $dark-black;
-	}
-
-	&__container {
-		position: relative;
-		width: 90%;
-		height: 90%;
-		max-width: 640px;
-		max-height: 600px;
-		padding: 15px 20px 10px;
-		background: $white;
-		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-		border-radius: 12px;
-		overflow: auto;
-
-		@media(max-width: 640px) {
-			width: 100%;
-			height: 100%;
-			max-height: 100%;
-			max-width: 100%;
-			padding: 15px 2% 10px;
-			border-radius: 0px;
-		}
 	}
 
 	&__input{

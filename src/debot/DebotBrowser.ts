@@ -13,6 +13,7 @@ import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
 import { pushItemToStage } from '/src/store/actions/debot';
 import { setSigningBox, setApproveWindow } from '/src/store/actions/debot';
 import InterfacesController from './interfaces';
+import { TDebotStageItem } from '/src/types';
 import {
 	IDebotBrowser,
 	TInterfacesQueueItem,
@@ -78,7 +79,7 @@ class DebotBrowser implements IDebotBrowser {
 				component: COMPONENTS_BINDINGS.TEXT,
 			};
 			
-			store.dispatch(pushItemToStage(stageObject));
+			store.dispatch(pushItemToStage(stageObject as TDebotStageItem));
 		}
 	}
 
@@ -154,7 +155,7 @@ class DebotBrowser implements IDebotBrowser {
 				isError: true,
 			};
 			
-			store.dispatch(pushItemToStage(stageObject));
+			store.dispatch(pushItemToStage(stageObject as TDebotStageItem));
 		}	
 	}
 
@@ -226,7 +227,7 @@ class DebotBrowser implements IDebotBrowser {
 				isError: true,
 			};
 			
-			store.dispatch(pushItemToStage(stageObject));
+			store.dispatch(pushItemToStage(stageObject as TDebotStageItem));
 		}, 1000)
 	}
 }

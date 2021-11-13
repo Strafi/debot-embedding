@@ -11,7 +11,7 @@ export const WalletErrors = {
 }
 
 export type TWalletData = {
-	address: Permissions['accountInteraction']['address'] | string;
+	address: string;
 	publicKey: Permissions['accountInteraction']['publicKey'];
 	contractType: Permissions['accountInteraction']['contractType'];
 }
@@ -19,8 +19,8 @@ export type TWalletData = {
 export interface IWalletService {
 	isConnected: boolean;
 	isPermissionsSubscribed: boolean;
-	responseToConnectionWaiter: typeof Promise.resolve | null;
-	rejectToConnectionWaiter: typeof Promise.reject | null;
+	responseToConnectionWaiter: null | ((value?: unknown) => void);
+	rejectToConnectionWaiter: null | ((reason?: any) => void);
 	connect: () => Promise<TWalletData>;
 	disconnect: () => Promise<void>;
 	getProviderState: () => Promise<ProviderApiResponse<'getProviderState'>>;
@@ -32,8 +32,8 @@ export interface IWalletService {
 class WalletService implements IWalletService {
 	isConnected = false;
 	isPermissionsSubscribed = false;
-	responseToConnectionWaiter = null;
-	rejectToConnectionWaiter = null;
+	responseToConnectionWaiter: null | ((value?: unknown) => void) = null;
+	rejectToConnectionWaiter: null | ((reason?: any) => void) = null;
 
 	async connect(): Promise<TWalletData> {
 		const hasProvider = await hasTonProvider();
@@ -57,7 +57,7 @@ class WalletService implements IWalletService {
 	
 			this.setConnectionStatus(true);
 	
-			return this.formWalletData(accountInteraction);
+			return this.formWalletData(accountInteraction) as TWalletData;
 		} catch (err) {
 			throw new Error(WalletErrors.INSUFFICIENT_PERMISSIONS);
 		}
@@ -143,7 +143,7 @@ class WalletService implements IWalletService {
 			});
 	}
 
-	private formWalletData(accountInteraction?: TWalletData | Permissions['accountInteraction']): TWalletData {
+	private formWalletData(accountInteraction?: TWalletData | Permissions['accountInteraction']): TWalletData | null {
 		if (!accountInteraction)
 			return null;
 

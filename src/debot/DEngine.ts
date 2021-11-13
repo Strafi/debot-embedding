@@ -10,6 +10,7 @@ import { setConnectWalletModal, setWallet } from '/src/store/actions/account';
 import DebotBrowser from './DebotBrowser';
 import InterfacesController from './interfaces';
 import { IDEngineStorageItem } from './types';
+import { TDebotStageItem } from '/src/types';
 
 interface IDEngine {
 	storage: Map<string, IDEngineStorageItem>
@@ -69,8 +70,8 @@ class DEngine implements IDEngine {
 	async callDebotFunction(
 		debotAddress: string,
 		interfaceAddress: string,
-		functionId: string,
-		input: unknown,
+		functionId?: string,
+		input?: unknown,
 	): Promise<void> {
 		const debotParams = this.storage.get(debotAddress);
 		const { debot_handle, debot_abi, browser } = debotParams!;
@@ -115,7 +116,7 @@ class DEngine implements IDEngine {
 				text: (err as Error).message,
 				component: COMPONENTS_BINDINGS.TEXT,
 				isError: true,
-			}));
+			} as TDebotStageItem));
 		}
 	}
 
@@ -138,7 +139,7 @@ class DEngine implements IDEngine {
 			component: COMPONENTS_BINDINGS.TEXT,
 		};
 		
-		store.dispatch(pushItemToStage(stageObject));
+		store.dispatch(pushItemToStage(stageObject as TDebotStageItem));
 	}
 
 	private async ensureWalletConnected(): Promise<void> {

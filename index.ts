@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import reactToWebComponent from 'react-to-webcomponent';
 
@@ -7,9 +7,7 @@ import StandaloneDebot from '/src/StandaloneDebot';
 
 import './src/styles/index.scss';
 
-const WebComponent = Component => reactToWebComponent(Component, React, ReactDOM) as any;
-
-window.customElements.define("standalone-browser", WebComponent(StandaloneBrowser));
-window.customElements.define("standalone-debot", WebComponent(StandaloneDebot));
+window.customElements.define("standalone-browser", reactToWebComponent(StandaloneBrowser, React, ReactDOM) as any);
+window.customElements.define("standalone-debot", reactToWebComponent(StandaloneDebot, React, ReactDOM) as any);
 
 export { StandaloneBrowser, StandaloneDebot };

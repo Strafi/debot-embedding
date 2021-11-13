@@ -12,8 +12,8 @@ export type TSetConnectWalletModalPayload = {
 	isError: boolean;
 	message?: string;
 }
-export type TSetConnectWalletModalAction = TReduxAction<TSetConnectWalletModalPayload>;
-export type TSetWalletAction = TReduxAction<TWalletData>;
+export type TSetConnectWalletModalAction = TReduxAction<TSetConnectWalletModalPayload | null>;
+export type TSetWalletAction = TReduxAction<TWalletData | null>;
 export type TAccountState = {
 	connectWalletModal: TSetConnectWalletModalPayload | null;
 	wallet: TWalletData | null;
