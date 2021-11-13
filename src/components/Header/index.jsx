@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
-import HeaderParamsContext from '/src/contexts/HeaderParamsContext';
-import DebotOnlyContext from '/src/contexts/DebotOnlyContext';
+import { HeaderParamsContext, DebotOnlyContext } from '/src/contexts';
 import SearchBar from '../SearchBar';
 import HeaderNetworkSelector from './NetworkSelector';
 import HeaderAccount from './Account';

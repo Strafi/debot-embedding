@@ -1,3 +1,5 @@
+import { DebotActivity } from '@tonclient/core';
+
 export type TDebotsListItem = {
 	title: string,
 	address: string,
@@ -7,9 +9,9 @@ export type TDebotsListItem = {
 export type TDebotStageItem = {
 	component: string,
 	config?: {
-		min: number,
-		max: number,
-		decimals: number,
+		min?: string,
+		max?: string,
+		decimals?: string,
 	}
 	menuItems?: Array<{ title: string, description?: string, functionId: string }>
 	text?: string,
@@ -21,13 +23,7 @@ export type TDebotStageItem = {
 
 export type TApproveWindow = {
 	submit: Function
-	params: {
-		dst: string,
-		fee: number,
-		out: Array<{ recipient: string, dst: string, amount: number }>,
-		setcode: boolean,
-		signkey: string,
-	}
+	params: DebotActivity
 }
 
 export type TSigningBox = {

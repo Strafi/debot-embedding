@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 
 import store from '/src/store';
 import { App, Browser } from '/src/components';
-import HeaderParamsContext from '/src/contexts/HeaderParamsContext';
-import DebotOnlyContext from '/src/contexts/DebotOnlyContext';
-import DebotParamsContext from '/src/contexts/DebotParamsContext';
+import { HeaderParamsContext, DebotOnlyContext, DebotParamsContext } from '/src/contexts';
 
 interface IStandaloneBrowserProps {
 	debotaddress?: string;

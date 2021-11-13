@@ -4,6 +4,7 @@ import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
 import { pushItemToStage } from '/src/store/actions/debot';
 import { TERMINAL_ABI } from '../ABIs';
 import BaseInterface from './base';
+import { TExtendedDebotInterfaceParams } from '../types';
 
 const ID = '8796536366ee21852db56dccb60bc564598b618c865fc50c8b1ab740bba128e3';
 
@@ -12,11 +13,11 @@ class Terminal extends BaseInterface {
 		super(ID, TERMINAL_ABI);
 	}
 
-	input(params) {
+	input(params: TExtendedDebotInterfaceParams) {
 		return this.inputStr(params);
 	}
 
-	inputStr(params) {
+	inputStr(params: TExtendedDebotInterfaceParams) {
 		const { answerId, multiline, prompt } = params.value;
 
 		const decodedPrompt = decodeString(prompt);
@@ -30,7 +31,7 @@ class Terminal extends BaseInterface {
 		store.dispatch(pushItemToStage(stageObject));
 	}
 
-	inputInt(params) {
+	inputInt(params: TExtendedDebotInterfaceParams) {
 		const { answerId, prompt } = params.value;
 
 		const decodedPrompt = decodeString(prompt);
@@ -44,11 +45,11 @@ class Terminal extends BaseInterface {
 		store.dispatch(pushItemToStage(stageObject));
 	}
 
-	inputUint(params) {
+	inputUint(params: TExtendedDebotInterfaceParams) {
 		return this.inputInt(params);
 	}
 
-	inputTons(params) {
+	inputTons(params: TExtendedDebotInterfaceParams) {
 		const { answerId, prompt } = params.value;
 
 		const decodedPrompt = decodeString(prompt);
@@ -66,7 +67,7 @@ class Terminal extends BaseInterface {
 		store.dispatch(pushItemToStage(stageObject));
 	}
 
-	inputBoolean(params) {
+	inputBoolean(params: TExtendedDebotInterfaceParams) {
 		const { answerId, prompt } = params.value;
 
 		const decodedPrompt = decodeString(prompt);
@@ -80,7 +81,7 @@ class Terminal extends BaseInterface {
 		store.dispatch(pushItemToStage(stageObject));
 	}
 
-	print(params) {
+	print(params: TExtendedDebotInterfaceParams) {
 		const { answerId, message } = params.value;
 
 		const decodedMessage = decodeString(message);

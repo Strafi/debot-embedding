@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import DebotParamsContext from '/src/contexts/DebotParamsContext';
+import { DebotParamsContext } from '/src/contexts';
 import { ControlWithPopup, AddDebot, Environment } from '/src/components';
 
 const ListControls = () => {

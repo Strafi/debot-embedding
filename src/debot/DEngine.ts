@@ -1,4 +1,4 @@
-import { DebotModule } from '@tonclient/core';
+import { DebotModule, RegisteredDebot, CallSet } from '@tonclient/core';
 
 import store from '/src/store';
 import WalletService from '/src/WalletService';
@@ -9,14 +9,22 @@ import { pushItemToStage, clearStage, setApproveWindow, setSigningBox } from '/s
 import { setConnectWalletModal, setWallet } from '/src/store/actions/account';
 import DebotBrowser from './DebotBrowser';
 import InterfacesController from './interfaces';
+import { IDEngineStorageItem } from './types';
 
-class DEngine {
-	constructor() {
-		this.mainDebotModule = new DebotModule(tonClientController.mainNetClient);
-		this.devDebotModule = new DebotModule(tonClientController.devNetClient);
-		this.fldDebotModule = new DebotModule(tonClientController.fldNetClient);
-		this.storage = new Map();
-	}
+interface IDEngine {
+	storage: Map<string, IDEngineStorageItem>
+	debotModule: DebotModule;
+	initDebot: (address: string) => Promise<RegisteredDebot>;
+	runDebot: (address: string) => Promise<RegisteredDebot | void>;
+	reloadDebot: (address: string) => Promise<RegisteredDebot | void>;
+	callDebotFunction: (debotAddress: string, interfaceAddress: string, functionId: string, input: unknown) => Promise<void>;
+}
+
+class DEngine implements IDEngine {
+	storage = new Map<string, IDEngineStorageItem>();
+	private mainDebotModule = new DebotModule(tonClientController.mainNetClient);
+	private devDebotModule = new DebotModule(tonClientController.devNetClient);
+	private fldDebotModule = new DebotModule(tonClientController.fldNetClient);
 
 	get debotModule() {
 		if (tonClientController.selectedNetwork === DEV_NETWORK)
@@ -28,7 +36,7 @@ class DEngine {
 		return this.mainDebotModule;
 	}
 
-	async initDebot(address) {
+	async initDebot(address: string): Promise<RegisteredDebot> {
 		const debotBrowser = new DebotBrowser();
 
 		await debotBrowser.init();
@@ -41,19 +49,7 @@ class DEngine {
 		return initParams
 	}
 
-	async ensureWalletConnected() {
-		try {
-			if (!WalletService.isConnected) {
-				const connectedWallet = await WalletService.connect();
-				store.dispatch(setWallet(connectedWallet));
-			}
-		} catch (err) {
-			store.dispatch(setConnectWalletModal({ message: err.message, isError: true }));
-			await WalletService.waitForConnection();
-		}
-	}
-
-	async runDebot(address) {
+	async runDebot(address: string): Promise<RegisteredDebot | void> {
 		await this.ensureWalletConnected();
 		
 		const initParams = await this.initDebot(address);
@@ -70,11 +66,16 @@ class DEngine {
 		return initParams;
 	}
 
-	async callDebotFunction(debotAddress, interfaceAddress, functionId, input) {
+	async callDebotFunction(
+		debotAddress: string,
+		interfaceAddress: string,
+		functionId: string,
+		input: unknown,
+	): Promise<void> {
 		const debotParams = this.storage.get(debotAddress);
-		const { debot_handle, debot_abi, browser } = debotParams;
+		const { debot_handle, debot_abi, browser } = debotParams!;
 
-		let call_set;
+		let call_set: CallSet | undefined;
 
 		if (functionId && functionId !== '0') {
 			const functionName = formDebotFunctionFromId(functionId);
@@ -111,27 +112,27 @@ class DEngine {
 			browser.releaseInterfacesQueue();
 
 			store.dispatch(pushItemToStage({
-				text: err.message,
+				text: (err as Error).message,
 				component: COMPONENTS_BINDINGS.TEXT,
 				isError: true,
 			}));
 		}
 	}
 
-	async reloadDebot(address) {
+	async reloadDebot(address: string): Promise<RegisteredDebot | void> {
 		store.dispatch(clearStage());
 		store.dispatch(setApproveWindow(null));
 		store.dispatch(setSigningBox(null));
 		
 		const debotParams = this.storage.get(address);
-		const { browser } = debotParams;
+		const { browser } = debotParams!;
 
 		browser.clearInterfacesQueue();
 
 		return this.runDebot(address);
 	}
 
-	showUnsupportedMessage() {
+	private showUnsupportedMessage(): void {
 		const stageObject = {
 			text: 'This DeBot is not yet supported by our browser :(\nTry another browser for now and come back to us later',
 			component: COMPONENTS_BINDINGS.TEXT,
@@ -139,8 +140,18 @@ class DEngine {
 		
 		store.dispatch(pushItemToStage(stageObject));
 	}
+
+	private async ensureWalletConnected(): Promise<void> {
+		try {
+			if (!WalletService.isConnected) {
+				const connectedWallet = await WalletService.connect();
+				store.dispatch(setWallet(connectedWallet));
+			}
+		} catch (err) {
+			store.dispatch(setConnectWalletModal({ message: (err as Error).message, isError: true }));
+			await WalletService.waitForConnection();
+		}
+	}
 }
 
-const dEngine = new DEngine();
-
-export default dEngine;
+export default new DEngine();

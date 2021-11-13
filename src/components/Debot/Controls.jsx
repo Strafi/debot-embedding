@@ -5,7 +5,7 @@ import { DEngine } from '/src/debot';
 import { removeLocalDebot } from '/src/helpers';
 import { setIsDebotError } from '/src/store/actions/debot';
 import { ControlWithPopup, AddDebot, Environment } from '/src/components';
-import DebotParamsContext from '/src/contexts/DebotParamsContext';
+import { DebotParamsContext } from '/src/contexts';
 import './index.scss';
 
 const DebotPageControls = ({ debotAddress }) => {

@@ -1,4 +1,4 @@
-function encodeString(decodedString: string): string | undefined{
+function encodeString(decodedString?: string): string | undefined{
 	if (typeof decodedString !== 'string')
 		return;
 

@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 
 import store from '/src/store';
 import { App, Debot } from '/src/components';
-import HeaderParamsContext from '/src/contexts/HeaderParamsContext';
-import DebotParamsContext from '/src/contexts/DebotParamsContext';
+import { HeaderParamsContext, DebotParamsContext } from '/src/contexts';
 
 interface IStandaloneDebotProps {
 	debotaddress: string;

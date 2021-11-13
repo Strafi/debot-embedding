@@ -4,6 +4,7 @@ import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
 import { pushItemToStage } from '/src/store/actions/debot';
 import { ADDRESS_INPUT_ABI } from '../ABIs';
 import BaseInterface from './base';
+import { TExtendedDebotInterfaceParams } from '../types';
 
 const ID = 'd7ed1bd8e6230871116f4522e58df0a93c5520c56f4ade23ef3d8919a984653b';
 
@@ -12,7 +13,7 @@ class AddressInput extends BaseInterface {
 		super(ID, ADDRESS_INPUT_ABI);
 	}
 
-	get(params) {
+	get(params: TExtendedDebotInterfaceParams) {
 		const { answerId, prompt } = params.value;
 
 		const decodedPrompt = prompt ? decodeString(prompt) : '';
@@ -26,7 +27,7 @@ class AddressInput extends BaseInterface {
 		store.dispatch(pushItemToStage(stageObject));
 	}
 
-	select(params) {
+	select(params: TExtendedDebotInterfaceParams) {
 		return this.get(params);
 	}
 }

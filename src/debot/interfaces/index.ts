@@ -9,8 +9,17 @@ import Echo from './echo';
 import Stdout from './stdout';
 import Userinfo from './userinfo';
 import SigningBoxInput from './signing_box_input';
+import { IDebotInterfaceParams } from '../types';
+import { IBaseInterface } from './base';
 
-class InterfacesController {
+interface IInterfacesController {
+	checkAreInterfacesSupported: (interfaces: string[]) => boolean;
+	delegateToInterface: (interfaceId: string, params: IDebotInterfaceParams) => void;
+}
+
+class InterfacesController implements IInterfacesController {
+	private state: Map<string, IBaseInterface>;
+
 	constructor() {
 		const terminal = new Terminal();
 		const menu = new Menu();
@@ -25,7 +34,7 @@ class InterfacesController {
 		const signingBoxInput = new SigningBoxInput();
 
 		this.state = new Map([
-			[terminal.id, terminal],
+			[terminal.id, terminal as IBaseInterface],
 			[media.id, media],
 			[menu.id, menu],
 			[amountInput.id, amountInput],
@@ -39,7 +48,7 @@ class InterfacesController {
 		]);
 	}
 
-	checkAreInterfacesSupported(interfaces) {
+	checkAreInterfacesSupported(interfaces: string[]): boolean {
 		for (const interfaceAddress of interfaces) {
 			const interfaceId = interfaceAddress.slice(2);
 
@@ -50,19 +59,17 @@ class InterfacesController {
 		return true;
 	}
 
-	delegateToInterface(interfaceId, params) {
+	delegateToInterface(interfaceId: string, params: IDebotInterfaceParams) {
 		const _interface = this.state.get(interfaceId);
 
 		console.log(`Calling ${_interface?.constructor?.name} by id: ${interfaceId}`);
 
 		try {
-			_interface.call(params);
+			_interface!.call(params);
 		} catch(_) {
 			console.error(`Interface with id ${interfaceId} is not implemented`);
 		}
 	}
 }
 
-const interfacesController = new InterfacesController();
-
-export default interfacesController;
+export default new InterfacesController();

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from '/src/store/hooks';
 import WalletService from '/src/WalletService';
 import { createDebotUrl } from '/src/helpers';
-import DebotOnlyContext from '/src/contexts/DebotOnlyContext';
+import { DebotOnlyContext } from '/src/contexts';
 import { Header, ConnectWallet } from '/src/components';
 import { setWallet } from '/src/store/actions/account';
 import './index.scss';

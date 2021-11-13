@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import DebotOnlyContext from '/src/contexts/DebotOnlyContext';
+import { DebotOnlyContext } from '/src/contexts';
 import { DebotsList, DebotPage } from '/src/components';
 
 const Browser = () => {

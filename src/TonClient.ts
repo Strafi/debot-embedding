@@ -6,21 +6,26 @@ TonClient.useBinaryLibrary(libWeb);
 
 interface ITonClientController {
 	selectedNetwork: string;
+	mainNetClient: TonClient;
+	devNetClient: TonClient;
+	fldNetClient: TonClient;
+	setSelectedNetwork: (network: string) => void;
+	client: TonClient;
 }
 
 class TonClientController implements ITonClientController {
 	selectedNetwork = localStorage.getItem(TON_NETWORK_LS_FIELD) || MAIN_NETWORK;
-	private mainNetClient = new TonClient({
+	mainNetClient = new TonClient({
 		network: {
 			server_address: MAIN_NETWORK,
 		},
 	});
-	private devNetClient = new TonClient({
+	devNetClient = new TonClient({
 		network: {
 			server_address: DEV_NETWORK,
 		},
 	});
-	private fldNetClient = new TonClient({
+	fldNetClient = new TonClient({
 		network: {
 			server_address: FLD_NETWORK,
 		},
