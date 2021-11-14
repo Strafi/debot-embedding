@@ -11,6 +11,8 @@ export { default as genKeyPairFromMnemonic } from './genKeyPairFromMnemonic';
 export { default as getEnvVariableFromInput } from './getEnvVariableFromInput';
 export { default as removeLocalDebot } from './removeLocalDebot';
 export { default as removeEnvVariable } from './removeEnvVariable';
+export { default as interfaceAddressToId } from './interfaceAddressToId';
+export { default as interfaceIdToAddress } from './interfaceIdToAddress';
 export { default as isCustomScrollBar } from './isCustomScrollBar';
 export { default as sliceAddress } from './sliceAddress';
 

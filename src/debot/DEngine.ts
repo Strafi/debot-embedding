@@ -1,9 +1,11 @@
 import { DebotModule, RegisteredDebot, CallSet } from '@tonclient/core';
 
 import store from '/src/store';
+import EventBus, { TDispatchType } from '/src/EventBus';
 import WalletService from '/src/WalletService';
 import tonClientController from '/src/TonClient';
-import { formDebotFunctionFromId } from '/src/helpers';
+import { formDebotFunctionFromId, interfaceAddressToId } from '/src/helpers';
+import { EVENTS } from '/src/constants/events';
 import { COMPONENTS_BINDINGS, DEV_NETWORK, FLD_NETWORK } from '/src/constants';
 import { pushItemToStage, clearStage, setApproveWindow, setSigningBox } from '/src/store/actions/debot';
 import { setConnectWalletModal, setWallet } from '/src/store/actions/account';
@@ -26,6 +28,30 @@ class DEngine implements IDEngine {
 	private mainDebotModule = new DebotModule(tonClientController.mainNetClient);
 	private devDebotModule = new DebotModule(tonClientController.devNetClient);
 	private fldDebotModule = new DebotModule(tonClientController.fldNetClient);
+
+	constructor() {
+		EventBus.register(EVENTS.CLIENT.EXECUTE_FUNCTION, (args: TDispatchType) => {
+			try {
+				const { debotAddress, interfaceId, functionId, data } = args;
+
+				if (!this.storage.has(debotAddress))
+					throw new Error(debotAddress ? 'Debot is not running' : 'Parameter debotAddress is required');
+
+				if (!interfaceId)
+					throw new Error('Parameter interfaceId is required');
+
+				this.callDebotFunction(debotAddress, interfaceId, functionId, data)
+					.catch(err => { throw err });
+			} catch(err) {
+				EventBus.dispatch(EVENTS.DEBOT.FUNCTION_EXECUTION_FAILED, {
+					interfaceId: args?.interfaceId,
+					debotAddress: args?.debotAddress,
+					functionId: args?.functionId,
+					data: { message: (err as Error).message },
+				});
+			}
+		});
+	}
 
 	get debotModule() {
 		if (tonClientController.selectedNetwork === DEV_NETWORK)
@@ -73,10 +99,9 @@ class DEngine implements IDEngine {
 		functionId?: string,
 		input?: unknown,
 	): Promise<void> {
+		let call_set: CallSet | undefined;
 		const debotParams = this.storage.get(debotAddress);
 		const { debot_handle, debot_abi, browser } = debotParams!;
-
-		let call_set: CallSet | undefined;
 
 		if (functionId && functionId !== '0') {
 			const functionName = formDebotFunctionFromId(functionId);
@@ -104,11 +129,25 @@ class DEngine implements IDEngine {
 		try {
 			const sendRes = await this.debotModule.send({ debot_handle, message: encodedMessage.message });
 
+			EventBus.dispatch(EVENTS.DEBOT.FUNCTION_EXECUTED, {
+				interfaceId: interfaceAddressToId(interfaceAddress),
+				debotAddress,
+				functionId,
+				data: { call_set },
+			});
+
 			browser.releaseInterfacesQueue();
 
 			return sendRes;
 		} catch(err) {
 			console.error(err);
+
+			EventBus.dispatch(EVENTS.DEBOT.FUNCTION_EXECUTION_FAILED, {
+				interfaceId: interfaceAddressToId(interfaceAddress),
+				debotAddress,
+				functionId,
+				data: { call_set, message: (err as Error).message },
+			});
 
 			browser.releaseInterfacesQueue();
 

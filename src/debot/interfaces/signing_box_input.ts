@@ -1,19 +1,18 @@
 import { DEngine } from '/src/debot';
-import { DEBOT_WC } from '/src/constants';
+import { interfaceIdToAddress } from '/src/helpers';
+import { SIGNING_BOX_INPUT_ID } from '/src/constants/debot';
 import { SIGNING_BOX_INPUT_ABI } from '../ABIs';
 import BaseInterface from './base';
 import { TExtendedDebotInterfaceParams } from '../types';
 
-const ID = 'c13024e101c95e71afb1f5fa6d72f633d51e721de0320d73dfd6121a54e4d40a';
-
 class SigningBoxInput extends BaseInterface {
 	constructor() {
-		super(ID, SIGNING_BOX_INPUT_ABI);
+		super(SIGNING_BOX_INPUT_ID, SIGNING_BOX_INPUT_ABI);
 	}
 
 	async get(params: TExtendedDebotInterfaceParams) {
 		const { value: { answerId }, debotAddress, signingBoxHandle } = params;
-		const interfaceAddress = `${DEBOT_WC}:${this.id}`;
+		const interfaceAddress = interfaceIdToAddress(this.id);
 
 		try {
 			await DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { value: signingBoxHandle });

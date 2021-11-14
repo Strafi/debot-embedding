@@ -1,17 +1,17 @@
 import store from '/src/store';
 import { DEngine } from '/src/debot';
-import { decodeString, encodeString } from '/src/helpers';
-import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
+import { decodeString, encodeString, interfaceIdToAddress } from '/src/helpers';
+import { COMPONENTS_BINDINGS } from '/src/constants';
 import { pushItemToStage } from '/src/store/actions/debot';
+import { ECHO_ID } from '/src/constants/debot';
 import { ECHO_ABI } from '../ABIs';
 import BaseInterface from './base';
 import { TExtendedDebotInterfaceParams } from '../types';
-
-const ID = 'f6927c0d4bdb69e1b52d27f018d156ff04152f00558042ff674f0fec32e4369d';
+import { TDebotStageItem } from '/src/types';
 
 class Echo extends BaseInterface {
 	constructor() {
-		super(ID, ECHO_ABI);
+		super(ECHO_ID, ECHO_ABI);
 	}
 
 	echo(params: TExtendedDebotInterfaceParams) {
@@ -20,7 +20,7 @@ class Echo extends BaseInterface {
 
 		const decodedRequest = decodeString(request);
 		const response = encodeString(decodedRequest);
-		const interfaceAddress = `${DEBOT_WC}:${this.id}`;
+		const interfaceAddress = interfaceIdToAddress(this.id);
 		
 		DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { response })
 			.catch(err => {
@@ -33,7 +33,7 @@ class Echo extends BaseInterface {
 					interfaceAddress,
 				};
 				
-				store.dispatch(pushItemToStage(stageObject));
+				store.dispatch(pushItemToStage(stageObject as TDebotStageItem));
 			});
 	}
 }

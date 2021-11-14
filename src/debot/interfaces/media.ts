@@ -1,19 +1,18 @@
 import store from '/src/store';
 import { DEngine } from '/src/debot';
-import { decodeString, encodeString } from '/src/helpers';
-import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
+import { decodeString, encodeString, interfaceIdToAddress } from '/src/helpers';
+import { COMPONENTS_BINDINGS } from '/src/constants';
 import { pushItemToStage } from '/src/store/actions/debot';
+import { MEDIA_ID } from '/src/constants/debot';
 import { MEDIA_ABI } from '../ABIs';
 import BaseInterface from './base';
 import { TExtendedDebotInterfaceParams } from '../types';
-
-const ID = '59cdc2aafe53760937dac5b1c4b89ce12950f56a56298108a987cfe49b7c84b5';
 
 class Media extends BaseInterface {
 	private mediaTypes: string[];
 
 	constructor() {
-		super(ID, MEDIA_ABI);
+		super(MEDIA_ID, MEDIA_ABI);
 
 		this.mediaTypes = [
 			encodeString('image/png')!,
@@ -27,7 +26,7 @@ class Media extends BaseInterface {
 
 	async getSupportedMediaTypes(params: TExtendedDebotInterfaceParams) {
 		const { value: { answerId }, debotAddress } = params;
-		const interfaceAddress = `${DEBOT_WC}:${this.id}`;
+		const interfaceAddress = interfaceIdToAddress(this.id);
 
 		try {
 			await DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { mediaTypes: this.mediaTypes });
@@ -47,7 +46,7 @@ class Media extends BaseInterface {
 			text: decodedDescription,
 			data: decodedData,
 			component: COMPONENTS_BINDINGS.MEDIA,
-			interfaceAddress: `${DEBOT_WC}:${this.id}`,
+			interfaceAddress: interfaceIdToAddress(this.id),
 		};
 		
 		store.dispatch(pushItemToStage(stageObject));

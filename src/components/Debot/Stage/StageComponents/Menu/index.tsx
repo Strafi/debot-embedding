@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useCallback, FC, ReactElement } from 'react';
+import React, { useState, useLayoutEffect, useCallback, FC, ReactElement } from 'react';
 import { DEngine } from '/src/debot';
 import { TDebotStageItem } from '/src/types';
 import './index.scss';

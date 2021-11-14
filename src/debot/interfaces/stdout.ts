@@ -1,16 +1,16 @@
 import store from '/src/store';
-import { decodeString } from '/src/helpers';
-import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
+import { decodeString, interfaceIdToAddress } from '/src/helpers';
+import { COMPONENTS_BINDINGS } from '/src/constants';
 import { pushItemToStage } from '/src/store/actions/debot';
+import { STDOUT_ID } from '/src/constants/debot';
 import { STDOUT_ABI } from '../ABIs';
 import BaseInterface from './base';
 import { TExtendedDebotInterfaceParams } from '../types';
-
-const ID = 'c91dcc3fddb30485a3a07eb7c1e5e2aceaf75f4bc2678111de1f25291cdda80b';
+import { TDebotStageItem } from '/src/types';
 
 class Stdout extends BaseInterface {
 	constructor() {
-		super(ID, STDOUT_ABI);
+		super(STDOUT_ID, STDOUT_ABI);
 	}
 
 	print(params: TExtendedDebotInterfaceParams) {
@@ -20,10 +20,10 @@ class Stdout extends BaseInterface {
 		const stageObject = {
 			text: decodedMessage,
 			component: COMPONENTS_BINDINGS.STDOUT,
-			interfaceAddress: `${DEBOT_WC}:${this.id}`,
+			interfaceAddress: interfaceIdToAddress(this.id),
 		};
 		
-		store.dispatch(pushItemToStage(stageObject));
+		store.dispatch(pushItemToStage(stageObject as TDebotStageItem));
 	}
 }
 

@@ -1,4 +1,6 @@
-function encodeString(decodedString?: string): string | undefined{
+export type TEncodeString = (decodedString?: string) => string | undefined
+
+const encodeString: TEncodeString = function (decodedString) {
 	if (typeof decodedString !== 'string')
 		return;
 

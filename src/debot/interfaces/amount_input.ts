@@ -1,16 +1,15 @@
 import store from '/src/store';
-import { decodeString } from '/src/helpers';
-import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
+import { decodeString, interfaceIdToAddress } from '/src/helpers';
+import { COMPONENTS_BINDINGS } from '/src/constants';
 import { pushItemToStage } from '/src/store/actions/debot';
+import { AMOUNT_INPUT_ID } from '/src/constants/debot';
 import { AMOUNT_INPUT_ABI } from '../ABIs';
 import BaseInterface from './base';
 import { TExtendedDebotInterfaceParams } from '../types';
 
-const ID = 'a1d347099e29c1624c8890619daf207bde18e92df5220a54bcc6d858309ece84';
-
 class AmountInput extends BaseInterface {
 	constructor() {
-		super(ID, AMOUNT_INPUT_ABI);
+		super(AMOUNT_INPUT_ID, AMOUNT_INPUT_ABI);
 	}
 
 	get(params: TExtendedDebotInterfaceParams) {
@@ -29,7 +28,7 @@ class AmountInput extends BaseInterface {
 			functionId: answerId,
 			config,
 			component: COMPONENTS_BINDINGS.AMOUNT_INPUT,
-			interfaceAddress: `${DEBOT_WC}:${this.id}`,
+			interfaceAddress: interfaceIdToAddress(this.id),
 		};
 		
 		store.dispatch(pushItemToStage(stageObject));
