@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 
+import { isCustomScrollBar } from '/src/helpers';
 import { CancelIcon } from '/src/components/icons';
 
 import './index.scss';
@@ -16,8 +17,8 @@ const Modal: FC<TProps> = ({
 	containerClassName: containerClassNameFromProps = '',
 	modalClassName: modalClassNameFromProps = '',
 }) => {
-	const modalClassName = `abstract-modal ${modalClassNameFromProps}`;
-	const modalContainerClassName = `abstract-modal__container ${containerClassNameFromProps}`;
+	const modalClassName = `abstract-modal ${modalClassNameFromProps} ${isCustomScrollBar() ? 'with-custom-scrollbar' : ''}`;
+	const modalContainerClassName = `abstract-modal__container ${containerClassNameFromProps} ${isCustomScrollBar() ? 'with-custom-scrollbar' : ''}`;
 
 	return (
 		<div className={modalClassName}>

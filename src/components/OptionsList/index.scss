@@ -20,7 +20,7 @@
 	user-select: none;
 	cursor: pointer;
 
-	@media(max-width: #{$extra-min-checkpoint}) {
+	@media(max-width: #{$mobile-checkpoint}) {
 		width: 100%;
 		min-width: 100%;
 
@@ -108,31 +108,6 @@
 
 			&:active {
 				background-color: darken($dark-grey, 10%);
-			}
-		}
-	}
-
-	&__remove-item-icon {
-		$size: 12px;
-		position: absolute;
-		width: $size;
-		height: $size;
-		top: 12px;
-		right: 6px;
-
-		.cancel-icon {
-			@include cancel-button-effects($red);
-
-			&:hover {
-				path {
-					stroke: $red;
-				}
-			}
-		
-			&:active {
-				path {
-					stroke: darken($red, 10%);
-				}
 			}
 		}
 	}

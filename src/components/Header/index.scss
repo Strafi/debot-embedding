@@ -3,12 +3,17 @@
 @import '../../styles/size.scss';
 
 .header-container {
-	position: relative;
+	z-index: 50;
+	position: sticky;
+	top: 0;
 	display: flex;
+	padding-top: $app-top-padding;
+	padding-bottom: 10px;
 	margin-bottom: $header-margin;
+	background-color: $white;
 
-	@media(max-width: #{$min-checkpoint}) {
-		margin-bottom: $header-margin-min;
+	@media(max-width: #{$mobile-checkpoint}) {
+		margin-bottom: 10px;
 	}
 
 	&__back-button {
@@ -43,7 +48,7 @@
 			}
 		}
 
-		@media (max-width: #{$extra-min-checkpoint}) {
+		@media (max-width: #{$mobile-checkpoint}) {
 			display: none;
 		}
 	}
@@ -125,5 +130,9 @@
 		.logout-icon {
 			@include cancel-button-effects($red, 'fill');
 		}
+	}
+
+	.debot__controls {
+		margin: 0;
 	}
 }

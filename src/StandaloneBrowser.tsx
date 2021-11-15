@@ -17,7 +17,7 @@ interface IStandaloneBrowserProps {
 
 const StandaloneBrowser: FC<IStandaloneBrowserProps> = props => {
 	const { hideenv, hiderestart, hidesave, debotonly, debotaddress } = props;
-	const isDebotOnly = debotonly === 'true';
+	const isDebotOnly = debotonly === 'true' && !!debotaddress;
 	const isHideEnv = hideenv === 'true';
 	const isHideRestart = hiderestart === 'true';
 	const isHideSave = hidesave === 'true';

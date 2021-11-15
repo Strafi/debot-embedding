@@ -10,14 +10,12 @@
 		justify-content: flex-end;
 		align-items: center;
 		width: 100%;
-		height: $debot-controls-height;
 		margin-bottom: $debot-controls-margin;
 
-		@media(max-width: #{$min-checkpoint}) {
+		@media(max-width: #{$mobile-checkpoint}) {
 			flex-direction: column;
 			align-items: flex-start;
 			justify-content: space-between;
-			height: $debot-list-controls-height-min;
 		}
 	}
 
@@ -45,11 +43,6 @@
 
 	&__list {
 		overflow-x: auto;
-		height: $debot-list-height;
-
-		@media(max-width: #{$min-checkpoint}) {
-			height: $debot-list-height-min;
-		}
 	}
 
 	&__item {
@@ -81,27 +74,6 @@
 
 		.network-icon {
 			margin-left: 6px;
-		}
-	}
-
-	&__item-date {
-		font-size: 16px;
-		font-weight: 400;
-		color: $grey;
-
-		&--underway {
-			font-weight: 600;
-			color: $dark-green;
-		}
-
-		&--voting {
-			font-weight: 600;
-			color: $dark-blue;
-		}
-
-		&--ended {
-			font-weight: 600;
-			color: $black;
 		}
 	}
 

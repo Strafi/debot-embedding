@@ -8,13 +8,11 @@ import { HeaderParamsContext, DebotParamsContext } from '/src/contexts';
 
 interface IStandaloneDebotProps {
 	debotaddress: string;
-	hideenv?: string;
 	hiderestart?: string;
 }
 
 const StandaloneDebot: FC<IStandaloneDebotProps> = props => {
-	const { hideenv, hiderestart, debotaddress } = props;
-	const isHideEnv = hideenv === 'true';
+	const { hiderestart, debotaddress } = props;
 	const isHideRestart = hiderestart === 'true';
 
 	const headerParams = {
@@ -24,9 +22,11 @@ const StandaloneDebot: FC<IStandaloneDebotProps> = props => {
 	}
 
 	const debotParams = {
-		hideEnv: isHideEnv,
+		hideEnv: true,
 		hideRestart: isHideRestart,
 		hideSave: true,
+		showControlsInHeader: true,
+		debotAddress: debotaddress,
 	}
 
 	return (
@@ -44,7 +44,6 @@ const StandaloneDebot: FC<IStandaloneDebotProps> = props => {
 
 StandaloneDebot.propTypes = {
 	debotaddress: PropTypes.string.isRequired,
-	hideenv: PropTypes.string,
 	hiderestart: PropTypes.string,
 }
 

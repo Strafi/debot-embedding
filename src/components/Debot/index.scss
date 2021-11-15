@@ -2,25 +2,17 @@
 @import '../../styles/colors.scss';
 
 .debot {
-	&--scroll-disabled {
-		max-height: 100vh;
-		overflow-y: hidden;
-	}
-
 	&__controls {
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
 		width: 100%;
-		height: $debot-controls-height;
 		margin-bottom: $debot-controls-margin;
 
-		@media(max-width: #{$min-checkpoint}) {
+		@media(max-width: #{$mobile-checkpoint}) {
 			flex-direction: column;
 			align-items: flex-start;
 			justify-content: space-between;
-			height: $debot-controls-height-min;
-			margin-bottom: $debot-controls-margin-min;
 		}
 	}
 

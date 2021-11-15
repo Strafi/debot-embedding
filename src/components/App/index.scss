@@ -1,18 +1,18 @@
 @import '../../styles/size.scss';
+@import '../../styles/mixins.scss';
 
-.app-container {
+.debot-embedding {
 	position: relative;
 	width: 100%;
-	min-height: 100vh;
-	padding: $app-top-padding 60px;
+	height: 100%;
+	padding: 0 $app-side-padding $app-top-padding;
+	font-family: Montserrat, Roboto, Arial, sans-serif;
 	overflow-x: hidden;
+	scroll-behavior: smooth;
+	box-sizing: border-box;
 
-	@media (max-width: #{$min-checkpoint}) {
-		padding: $app-top-padding 60px $app-bottom-padding-min;
-	}
-
-	@media (max-width: #{$extra-min-checkpoint}) {
-		padding: $app-top-padding 20px $app-bottom-padding-min;
+	&--scroll-disabled {
+		overflow: hidden;
 	}
 
 	&__flex-wrapper {
@@ -22,5 +22,28 @@
 		width: 100%;
 		max-width: $main-wrapper-max-width;
 		margin: 0 auto;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	h1 {
+		margin: 0;
+	}
+	
+	a {
+		box-sizing: border-box;
+		color: inherit;
+		text-decoration: none;
+	
+		&:hover, &:active {
+			color: inherit;
+			text-decoration: none;
+		}
+	}
+
+	&.with-custom-scrollbar, .with-custom-scrollbar {
+		@include custom-scroll-bar;
 	}
 }

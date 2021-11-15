@@ -1,11 +1,12 @@
-import React, { FC, useEffect, useContext } from 'react';
+import React, { FC, useEffect, useContext, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useSelector, useDispatch } from '/src/store/hooks';
 import WalletService from '/src/WalletService';
-import { createDebotUrl } from '/src/helpers';
-import { DebotOnlyContext } from '/src/contexts';
+import { createDebotUrl, isCustomScrollBar } from '/src/helpers';
+import { DebotOnlyContext, AppComponentRefContext } from '/src/contexts';
 import { Header, ConnectWallet } from '/src/components';
+import { SigningBox, ApproveWindow } from '/src/components';
 import { setWallet } from '/src/store/actions/account';
 import './index.scss';
 
@@ -17,7 +18,10 @@ const App: FC<TProps> = ({ children, initialDebotAddress }) => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const isDebotOnly = useContext(DebotOnlyContext);
+	const appElementRef = useRef<HTMLDivElement>(null);
 	const isConnectWalletModalVisible = useSelector(state => !!state.account.connectWalletModal);
+	const isSigningBoxVisible = useSelector(state => !!state.debot.signingBox);
+	const isApproveWindowVisible = useSelector(state => !!state.debot.approveWindow);
 	const hasWallet = useSelector(state => !!state.account.wallet);
 
 	useEffect(() => {
@@ -42,13 +46,20 @@ const App: FC<TProps> = ({ children, initialDebotAddress }) => {
 		onMount();
 	}, []);
 
+	const isScrollDisabled = isSigningBoxVisible || isApproveWindowVisible || isConnectWalletModalVisible; // 
+	const appClassNames = `debot-embedding ${isCustomScrollBar() ? 'with-custom-scrollbar' : ''} ${isScrollDisabled ? 'debot-embedding--scroll-disabled' : ''}`;
+
 	return (
-		<div className='app-container'>
-			<Header />
-			<div className='app-container__flex-wrapper'>
-				{children}
+		<div ref={appElementRef} className={appClassNames}>
+			<AppComponentRefContext.Provider value={appElementRef}>
 				{isConnectWalletModalVisible && !hasWallet && <ConnectWallet />}
-			</div>
+				{isSigningBoxVisible && <SigningBox />}
+				{isApproveWindowVisible && <ApproveWindow />}
+				<Header />
+				<div className='debot-embedding__flex-wrapper'>
+					{children}
+				</div>
+			</AppComponentRefContext.Provider>
 		</div>
 	);
 }

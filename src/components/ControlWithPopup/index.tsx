@@ -13,6 +13,8 @@ type TProps = {
 
 const ControlWithPopup: FC<TProps> = ({ children, name, height = DEFAULT_HEIGHT, width = DEFAULT_WIDTH }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const popupRef = useRef<HTMLDivElement>(null);
+	const [rightOffset, setRightOffset] = useState(0);
 	const [isControlOpen, setIsControlOpen] = useState(false);
 
 	const closePopup = () => setIsControlOpen(false);
@@ -27,6 +29,14 @@ const ControlWithPopup: FC<TProps> = ({ children, name, height = DEFAULT_HEIGHT,
 	}, [isControlOpen]);
 
 	useEffect(() => {
+		if (popupRef?.current) {
+			const rect = popupRef.current.getBoundingClientRect();
+			const isInViewport = rect.x > 0;
+
+			if (!isInViewport)
+				setRightOffset(rect.x - 10);
+		}
+
 		document.addEventListener('click', handleClickOutside);
 
 		return () => {
@@ -45,6 +55,7 @@ const ControlWithPopup: FC<TProps> = ({ children, name, height = DEFAULT_HEIGHT,
 	const containerStyles = {
 		'--height': `${height}px`,
 		'--width': `${width}px`,
+		'--right': `${rightOffset}px`,
 	} as CSSProperties;
 
 	return (
@@ -61,6 +72,7 @@ const ControlWithPopup: FC<TProps> = ({ children, name, height = DEFAULT_HEIGHT,
 			<div
 				className={containerClassName}
 				style={containerStyles}
+				ref={popupRef}
 			>
 				<ControlWithPopupContext.Provider value={{ closePopup }}>
 					{isControlOpen && children}

@@ -1,23 +1,12 @@
+// utils
 $main-wrapper-max-width: 1050px;
 $stage-max-width: 850px;
 $options-switcher-width: 245px;
-
-$app-top-padding: 30px;
 $header-height: 36px;
-$header-margin: 50px;
-$debot-controls-height: 40px;
+$header-margin: 30px;
+$app-side-padding: 10px;
+$app-top-padding: 10px;
 $debot-controls-margin: 10px;
-$debot-list-height: calc(100vh - #{$app-top-padding} - #{$app-top-padding} - #{$header-height} - #{$header-margin} - #{$debot-controls-height} - #{$debot-controls-margin});
-$stage-height: calc(100vh - #{$app-top-padding} - #{$app-top-padding} - #{$header-height} - #{$header-margin} - #{$debot-controls-height} - #{$debot-controls-margin});
 
-$min-checkpoint: 643px;
-$app-bottom-padding-min: 30px;
-$header-margin-min: 20px;
-$header-height-min: 36px;
-$debot-list-controls-height-min: 65px;
-$debot-controls-height-min: 110px;
-$debot-controls-margin-min: 20px;
-$debot-list-height-min: calc(100vh - #{$app-top-padding} - #{$app-bottom-padding-min} - #{$header-height-min} - #{$header-margin-min} - #{$debot-list-controls-height-min} - #{$debot-controls-margin});
-$stage-height-min: calc(100vh - #{$app-top-padding} - #{$app-bottom-padding-min} - #{$header-height-min} - #{$header-margin-min} - #{$debot-controls-height-min} - #{$debot-controls-margin-min});
-
-$extra-min-checkpoint: 470px;
+// checkpoints
+$mobile-checkpoint: 470px;

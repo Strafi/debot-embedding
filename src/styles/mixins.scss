@@ -1,36 +1,5 @@
 @import './colors.scss';
 
-@mixin link-effects($color) {
-	transition: color .2s;
-	text-decoration: underline;
-	cursor: pointer;
-
-	&:hover {
-		text-decoration: underline;
-		color: darken($color, 15%);
-	}
-
-	&:active {
-		color: darken($color, 20%);
-	}
-}
-
-@mixin link-effects-border($color) {
-	transition: color .2s, border-color .2s;
-	border-bottom: 1px solid $color;
-	cursor: pointer;
-
-	&:hover {
-		border-color: darken($color, 15%);
-		color: darken($color, 15%);
-	}
-
-	&:active {
-		border-color: darken($color, 20%);
-		color: darken($color, 20%);
-	}
-}
-
 @mixin button-effects($background-color, $color) {
 	transition: background-color .2s, color .2s;
 	cursor: pointer;
@@ -104,6 +73,7 @@
 		border-radius: 3px;
 		-webkit-box-shadow: inset 0 0 12px rgba(0, 0, 0, .1);
 		box-shadow: inset 0 0 12px rgba(0, 0, 0, .1);
+		background-color: rgba(#FAFAFA, .8);
 	}
 	
 	&::-webkit-scrollbar-thumb {

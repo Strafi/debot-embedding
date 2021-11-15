@@ -36,7 +36,7 @@
 			margin-left: 6px;
 		}
 
-		@media(max-width: #{$extra-min-checkpoint}) {
+		@media(max-width: #{$mobile-checkpoint}) {
 			flex-direction: column;
 			align-items: flex-start;
 

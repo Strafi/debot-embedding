@@ -1,17 +1,24 @@
 @import '../../../styles/colors.scss';
 @import '../../../styles/mixins.scss';
+@import '../../../styles/size.scss';
 
 .abstract-modal {
-	position: fixed;
+	position: sticky;
 	z-index: 100;
-	left: 0;
 	top: 0;
+	left: 0;
+	transform: translateX(-#{$app-side-padding});
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
-	height: 100%;
+	width: calc(100% + #{$app-side-padding} + #{$app-side-padding}) ;
+	height: calc(100% + #{$app-top-padding});
 	background-color: rgba(0, 0, 0, 0.66);
+	overflow-x: hidden;
+
+	@media(max-width: 640px) {
+		overflow: hidden;
+	}
 
 	&__container {
 		position: relative;

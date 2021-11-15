@@ -1,9 +1,9 @@
-import React, { Component, createRef } from 'react';
-import { connect } from 'react-redux';
+import React, { FC, useContext, useEffect } from 'react';
 
+import { useSelector } from '/src/store/hooks';
 import { COMPONENTS_BINDINGS } from '/src/constants';
-import { isCustomScrollBar } from '/src/helpers';
 import { Loader } from '/src/components';
+import { AppComponentRefContext } from '/src/contexts';
 import {
 	Text,
 	Stdout,
@@ -16,42 +16,46 @@ import {
 	Menu,
 	Media,
 } from './StageComponents';
-import { TRootStoreState } from '/src/store/types';
 
 import './index.scss';
 
-type TComponentSelfProps = {
+const bindedComponents = {
+	[COMPONENTS_BINDINGS.INPUT]: Input,
+	[COMPONENTS_BINDINGS.TEXTAREA]: Textarea,
+	[COMPONENTS_BINDINGS.AMOUNT_INPUT]: AmountInput,
+	[COMPONENTS_BINDINGS.CONFIRM_INPUT]: ConfirmInput,
+	[COMPONENTS_BINDINGS.ADDRESS_INPUT]: AddressInput,
+	[COMPONENTS_BINDINGS.TOKENS_INPUT]: TokensInput,
+	[COMPONENTS_BINDINGS.TEXT]: Text,
+	[COMPONENTS_BINDINGS.STDOUT]: Stdout,
+	[COMPONENTS_BINDINGS.MENU]: Menu,
+	[COMPONENTS_BINDINGS.MEDIA]: Media,
+};
+
+type TProps = {
 	debotAddress: string;
-}
+};
 
-type TReduxConnectReturn = {
-	stage: TRootStoreState['debot']['stage'];
-	isDebotError: TRootStoreState['debot']['isDebotError'];
-}
+const Stage: FC<TProps> = ({ debotAddress }) => {
+	const appElementRef = useContext(AppComponentRefContext);
+	const stage = useSelector(store => store.debot.stage);
+	const isDebotError = useSelector(store => store.debot.isDebotError);
+	const stageLength = stage.length;
 
-type TComponentProps = TComponentSelfProps & TReduxConnectReturn;
+	useEffect(() => {
+		if (stageLength) {
+			if (appElementRef?.current)
+				setTimeout(() => appElementRef!.current!.scrollTop = appElementRef!.current!.scrollHeight, 0);
+		}
+	}, [stageLength]);
 
-class Stage extends Component<TComponentProps> {
-	stageRef = createRef<HTMLDivElement>();
-
-	stageComponents = {
-		[COMPONENTS_BINDINGS.INPUT]: Input,
-		[COMPONENTS_BINDINGS.TEXTAREA]: Textarea,
-		[COMPONENTS_BINDINGS.AMOUNT_INPUT]: AmountInput,
-		[COMPONENTS_BINDINGS.CONFIRM_INPUT]: ConfirmInput,
-		[COMPONENTS_BINDINGS.ADDRESS_INPUT]: AddressInput,
-		[COMPONENTS_BINDINGS.TOKENS_INPUT]: TokensInput,
-		[COMPONENTS_BINDINGS.TEXT]: Text,
-		[COMPONENTS_BINDINGS.STDOUT]: Stdout,
-		[COMPONENTS_BINDINGS.MENU]: Menu,
-		[COMPONENTS_BINDINGS.MEDIA]: Media,
+	if (!stageLength) {
+		return <Loader isFailed={isDebotError} />
 	}
 
-	formStageComponents = () => {
-		const { stage, debotAddress } = this.props;
-
+	const formStageComponents = () => {
 		return stage.map((stageItem, index) => {
-			const Component = this.stageComponents[stageItem.component];
+			const Component = bindedComponents[stageItem.component];
 
 			return <Component
 				key={`${stageItem.functionId}-${index}`}
@@ -61,34 +65,15 @@ class Stage extends Component<TComponentProps> {
 		});
 	}
 
-	componentDidUpdate(prevProps: TComponentProps) {
-		if (prevProps.stage.length !== this.props.stage.length) {
-			if (this.stageRef?.current)
-				setTimeout(() => this.stageRef!.current!.scrollTop = this.stageRef!.current!.scrollHeight, 0);
-		}
-	}
+	const stageComponents = formStageComponents();
 
-	render() {
-		const { stage, isDebotError } = this.props;
-
-		if (!stage.length) {
-			return <Loader isFailed={isDebotError} />
-		}
-
-		const stageComponents = this.formStageComponents();
-
-		const stageClassName = `stage ${isCustomScrollBar() ? 'with-custom-scrollbar' : ''}`;
-
-		return (
-			<div ref={this.stageRef} className={stageClassName}>
-				<div className='stage__container'>
-					{stageComponents}
-				</div>
+	return (
+		<div className='stage'>
+			<div className='stage__container'>
+				{stageComponents}
 			</div>
-		)
-	}
+		</div>
+	)
 }
 
-const mapStateToProps = ({ debot: { stage, isDebotError } }: TRootStoreState): TReduxConnectReturn => ({ stage, isDebotError });
-
-export default connect(mapStateToProps)(Stage);
+export default Stage;

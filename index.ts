@@ -12,7 +12,7 @@ import EventBus, { IEventBus } from '/src/EventBus';
 import { decodeString, TDecodeString } from '/src/helpers/decodeString';
 import encodeString, { TEncodeString } from '/src/helpers/encodeString';
 
-import './src/styles/index.scss';
+import '/src/styles/normalize.scss';
 
 window.customElements.define("standalone-browser", reactToWebComponent(StandaloneBrowser, React, ReactDOM) as any);
 window.customElements.define("standalone-debot", reactToWebComponent(StandaloneDebot, React, ReactDOM) as any);
