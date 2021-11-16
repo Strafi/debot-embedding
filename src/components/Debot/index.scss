@@ -1,5 +1,4 @@
 @import '../../styles/size.scss';
-@import '../../styles/colors.scss';
 
 .debot {
 	&__controls {
@@ -21,16 +20,16 @@
 		margin-right: 20px;
 		font-weight: 600;
 		font-size: 18px;
-		color: $blue;
+		color: var(--semi-button-color);
 		cursor: pointer;
 		transition: color .2s;
 
 		&:hover {
-			color: $light-blue;
+			color: var(--semi-button-hover-color);
 		}
 
 		&:active {
-			color: $dark-blue;
+			color: var(--semi-button-active-color);
 		}
 
 		&:last-child {

@@ -1,7 +1,52 @@
 @import '../../styles/size.scss';
 @import '../../styles/mixins.scss';
+@import '../../styles/colors.scss';
 
 .debot-embedding {
+	//colors
+	--header-text-color: #{$dark-black};
+	--text-color: #{$black};
+	--secondary-text-color: #{$grey};
+
+	--background-color: #{$white};
+	--secondary-background-color: #{$dark-grey};
+
+	--primary-button-background-color: #{$dark-green};
+	--primary-button-text-color: #{$white};
+	--primary-button-background-hover-color: #{darken($dark-green, 4%)};
+	--primary-button-text-hover-color: #{darken($white, 4%)};
+
+	--semi-button-color: #{$blue};
+	--semi-button-hover-color: #{$light-blue};
+	--semi-button-active-color: #{$dark-blue};
+
+	--menu-accent-color: #{$dark-blue};
+	--menu-color: #{$white};
+
+	--confirm-accent-color: #{$dark-green};
+	--confirm-color: #{$white};
+	--decline-accent-color: #{$red};
+	--decline-color: #{$white};
+
+	--searchbar-border-color: #{$searchbar-border-color};
+	--searchbar-border-color-active: #{$dark-blue};
+
+	--back-button-color: #{$grey};
+	--back-button-hover-color: #{darken($grey, 15%)};
+
+	--error-color: #{$red};
+	--warning-color: #{$warning};
+	--success-color: #{$green};
+
+	--cancel-color: #{$grey};
+	--cancel-hover-color: #{darken($red, 15%)};
+	--cancel-active-color: #{$red};
+
+	--table-background-color: #{$table-background-color};
+	--table-border-color: #{$table-border-color};
+
+	--disabled-color: #{$grey};
+
 	position: relative;
 	width: 100%;
 	height: 100%;

@@ -1,4 +1,3 @@
-@import '../../styles/colors.scss';
 @import '../../styles/size.scss';
 
 .debots-list {
@@ -24,16 +23,16 @@
 		margin-right: 20px;
 		font-weight: 600;
 		font-size: 18px;
-		color: $blue;
+		color: var(--semi-button-color);
 		cursor: pointer;
 		transition: color .2s;
 
 		&:hover {
-			color: $light-blue;
+			color: var(--semi-button-hover-color);
 		}
 
 		&:active {
-			color: $dark-blue;
+			color: var(--semi-button-active-color);
 		}
 
 		&:last-child {
@@ -49,14 +48,14 @@
 		display: inline-block;
 		width: 100%;
 		padding: 18px 36px;
-		background-color: $white;
+		background-color: var(--background-color);
 		transition: box-shadow .2s;
 		cursor: pointer;
 
 		&--grey {
 			padding: 14px 36px;
 			margin: 4px 0;
-			background-color: $light-grey;
+			background-color: var(--table-background-color);
 		}
 
 		&:hover {
@@ -70,7 +69,7 @@
 		margin-bottom: 10px;
 		font-size: 20px;
 		font-weight: 600;
-		color: $black;
+		color: var(--text-color);
 
 		.network-icon {
 			margin-left: 6px;
@@ -80,7 +79,7 @@
 	&__item-address {
 		font-size: 16px;
 		font-weight: 400;
-		color: $grey;
+		color: var(--secondary-text-color);
 		word-break: break-word;
 	}
 
@@ -88,6 +87,7 @@
 		margin-bottom: 24px;
 		font-size: 20px;
 		font-weight: 700;
+		color: var(--text-color);
 
 		&:not(:first-child) {
 			margin-top: 24px;

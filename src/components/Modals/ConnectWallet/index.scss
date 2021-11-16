@@ -1,4 +1,3 @@
-@import '../../../styles/colors.scss';
 @import '../../../styles/mixins.scss';
 
 .connect-wallet-modal {
@@ -15,12 +14,12 @@
 		text-align: center;
 		font-size: 30px;
 		font-weight: 700;
-		color: $dark-black;
+		color: var(--header-text-color);
 	}
 
 	&__description {
 		font-size: 20px;
-		color: $dark-black;
+		color: var(--text-color);
 	}
 
 	&__retry {
@@ -28,6 +27,6 @@
 		padding: 8px 16px;
 		font-size: 26px;
 
-		@include bordered-button($blue, $white);
+		@include bordered-button(var(--semi-button-color), var(--background-color));
 	}
 }

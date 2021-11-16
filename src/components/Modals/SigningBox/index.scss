@@ -9,7 +9,7 @@
 	max-width: 640px;
 	max-height: 600px;
 	padding: 15px 20px 10px;
-	background: $white;
+	background: var(--background-color);
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 12px;
 	overflow: auto;
@@ -20,39 +20,39 @@
 		text-align: center;
 		font-size: 30px;
 		font-weight: 700;
-		color: $dark-black;
+		color: var(--header-text-color);
 	}
 
 	&__description {
 		margin-bottom: 20px;
 		font-size: 24px;
-		color: $dark-black;
+		color: var(--header-text-color);
 	}
 
 	&__input {
 		height: 70px;
 		width: 100%;
 		margin-bottom: 4px;
-		color: $grey;
+		color: var(--secondary-text-color);
 		font-size: 18px;
 		outline: none;
 		transition: color .2s;
 		border: none;
 		resize: none;
-		border-bottom: 1px solid $grey;
-		background: $light-grey;
+		border-bottom: 1px solid var(--table-border-color);
+		background: var(--table-background-color);
 
 		&:not(.signing-box__input--error):focus {
-			color: $dark-blue;
-			border-color: $dark-blue;
+			color: var(--semi-button-active-color);
+			border-color: var(--semi-button-active-color);
 		}
 
 		&--error {
-			color: $red;
-			border-color: $red;
+			color: var(--error-color);
+			border-color: var(--error-color);
 
 			&::placeholder {
-				color: $red;
+				color: var(--error-color);
 			}
 		}
 
@@ -68,7 +68,7 @@
 
 		&-error {
 			font-size: 14px;
-			color: $red;
+			color: var(--error-color);
 		}
 	}
 
@@ -88,7 +88,7 @@
 		align-items: center;
 		height: 200px;
 		border-radius: 8px;
-		background-color: $white;
+		background-color: var(--background-color);
 		overflow: hidden;
 
 		&-dropable-overlay {
@@ -128,7 +128,7 @@
 			height: 20px;
 			font-size: 14px;
 			font-weight: 700;
-			color: $red;
+			color: var(--error-color);
 		}
 	}
 }

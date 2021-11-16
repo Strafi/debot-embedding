@@ -1,5 +1,3 @@
-@import '../../../../../styles/colors.scss';
-
 .stage-component {
 	&__confirm-input-container {
 		display: flex;
@@ -22,26 +20,27 @@
 		margin-bottom: 6px;
 		font-weight: 600;
 		font-size: 16px;
-		color: $dark-green;
-		border: 1px solid $dark-green;
+		color: var(--confirm-accent-color);
+		border: 1px solid var(--confirm-accent-color);
+		background-color: var(--confirm-color);
 		border-radius: 8px;
-		background-color: $white;
 		user-select: none;
 		cursor: pointer;
 		transition: color .2s, background-color .2s;
 
 		&:hover {
-			color: $white;
-			background-color: $dark-green;
+			color: var(--confirm-color);
+			background-color: var(--confirm-accent-color);
 		}
 
 		&--decline {
-			color: $red;
-			border-color: $red;
+			color: var(--decline-accent-color);
+			border-color: var(--decline-accent-color);
+			background-color: var(--decline-color);
 
 			&:hover {
-				color: $white;
-				background-color: $red;
+				color: var(--decline-color);
+				background-color: var(--decline-accent-color);
 			}
 		}
 

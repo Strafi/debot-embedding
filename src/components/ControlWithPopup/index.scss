@@ -1,4 +1,3 @@
-@import '../../styles/colors.scss';
 @import '../../styles/size.scss';
 
 .control-with-popup {
@@ -9,22 +8,22 @@
 	&__label {
 		font-weight: 600;
 		font-size: 18px;
-		color: $blue;
+		color: var(--semi-button-color);
 		cursor: pointer;
 		transition: color .2s;
 		user-select: none;
 
 		&:hover {
-			color: $light-blue;
+			color: var(--semi-button-hover-color);
 		}
 	}
 
 	&--active {
 		.control-with-popup__label {
-			color: $dark-blue;
+			color: var(--semi-button-active-color);
 
 			&:hover {
-				color: $dark-blue;
+				color: var(--semi-button-active-color);
 			}
 		}
 	}
@@ -58,7 +57,7 @@
 		max-height: var(--height);
 		width: var(--width);
 		max-width: 600px;
-		background-color: $white;
+		background-color: var(--background-color);
 		border-radius: 10px;
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
 		transition: opacity .2s, top .2s;

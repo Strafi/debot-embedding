@@ -1,4 +1,3 @@
-@import '../../styles/colors.scss';
 @import '../../styles/mixins.scss';
 @import '../../styles/size.scss';
 
@@ -10,7 +9,7 @@
 	padding-top: $app-top-padding;
 	padding-bottom: 10px;
 	margin-bottom: $header-margin;
-	background-color: $white;
+	background-color: var(--background-color);
 
 	@media(max-width: #{$mobile-checkpoint}) {
 		margin-bottom: 10px;
@@ -20,16 +19,12 @@
 		display: flex;
 		align-items: center;
 		margin-right: 12px;
-		color: $grey;
+		color: var(--back-button-color);
 		transition: color .2s;
 
-		&:not(.header-container__back-button--disabled) {
+		&:not(a.header-container__back-button--disabled) {
 			&:hover {
-				color: darken($grey, 15%);
-			}
-	
-			&:active {
-				color: darken($grey, 20%);
+				color: var(--back-button-hover-color);
 			}
 	
 			.back-icon {
@@ -40,11 +35,12 @@
 		}
 
 		&--disabled {
+			color: var(--disabled-color);
 			opacity: 0.4;
 			cursor: default;
 
 			&:hover {
-				color: $grey;
+				color: var(--disabled-color);
 			}
 		}
 
@@ -108,11 +104,7 @@
 		transition: color .2s;
 
 		&:hover {
-			color: $light-blue;
-		}
-
-		&:active {
-			color: $dark-blue;
+			color: var(--semi-button-hover-color);
 		}
 	}
 
@@ -128,7 +120,7 @@
 		}
 
 		.logout-icon {
-			@include cancel-button-effects($red, 'fill');
+			@include cancel-button-effects(var(--cancel-hover-color), 'fill');
 		}
 	}
 

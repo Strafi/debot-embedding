@@ -1,5 +1,3 @@
-@import '../../../../../styles/colors.scss';
-
 .stage-component__text {
 	margin-bottom: 12px;
 	font-weight: 600;
@@ -8,6 +6,6 @@
     word-break: break-word;
 
 	&--error {
-		color: $red;
+		color: var(--error-color);
 	}
 }
