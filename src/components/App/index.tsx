@@ -1,6 +1,7 @@
-import React, { FC, useEffect, useContext, useRef } from 'react';
+import React, { FC, useLayoutEffect, useContext, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import TonClient from '/src/TonClient';
 import { useSelector, useDispatch } from '/src/store/hooks';
 import WalletService from '/src/WalletService';
 import { createDebotUrl, isCustomScrollBar } from '/src/helpers';
@@ -12,10 +13,11 @@ import './index.scss';
 
 type TProps = {
 	initialDebotAddress?: string;
+	initialNetwork?: string;
 	isEventsOnly?: boolean;
 }
 
-const App: FC<TProps> = ({ children, initialDebotAddress, isEventsOnly }) => {
+const App: FC<TProps> = ({ children, initialDebotAddress, isEventsOnly, initialNetwork }) => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const isDebotOnly = useContext(DebotOnlyContext);
@@ -25,7 +27,7 @@ const App: FC<TProps> = ({ children, initialDebotAddress, isEventsOnly }) => {
 	const isApproveWindowVisible = useSelector(state => !!state.debot.approveWindow);
 	const hasWallet = useSelector(state => !!state.account.wallet);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const onMount = async () => {
 			const providerState = await WalletService.getProviderState();
 
@@ -43,6 +45,9 @@ const App: FC<TProps> = ({ children, initialDebotAddress, isEventsOnly }) => {
 				history.replace(debotUrl);
 			}
 		}
+
+		if (initialNetwork)
+			TonClient.setSelectedNetwork(initialNetwork);
 
 		onMount();
 	}, []);

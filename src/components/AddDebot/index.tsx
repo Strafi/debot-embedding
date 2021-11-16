@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useCallback, FC, ChangeEvent } from 'react';
-import tonClientController from '/src/TonClient';
+import TonClient from '/src/TonClient';
 import { addLocalDebot } from '/src/helpers';
 import { ControlWithPopupContext } from '/src/contexts';
 import { OptionsList } from '/src/components';
@@ -15,7 +15,7 @@ const AddDebot: FC<TProps> = ({ prefilledAddress = '' }) => {
 	const popupContext = useContext(ControlWithPopupContext);
 	const [debotName, setDebotName] = useState('');
 	const [debotAddress, setDebotAddress] = useState(prefilledAddress);
-	const [selectedNetwork, setSelectedNetwork] = useState(tonClientController.selectedNetwork);
+	const [selectedNetwork, setSelectedNetwork] = useState(TonClient.selectedNetwork);
 
 	const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => setDebotAddress(e.target.value);
 

@@ -4,15 +4,17 @@ import PropTypes from 'prop-types';
 
 import store from '/src/store';
 import { App, Debot } from '/src/components';
+import { MAIN_NETWORK } from '/src/constants';
 import { HeaderParamsContext, DebotParamsContext } from '/src/contexts';
 
 interface IStandaloneDebotProps {
 	debotaddress: string;
 	hiderestart?: string;
+	network?: string;
 }
 
 const StandaloneDebot: FC<IStandaloneDebotProps> = props => {
-	const { hiderestart, debotaddress } = props;
+	const { hiderestart, debotaddress, network = MAIN_NETWORK } = props;
 	const isHideRestart = hiderestart === 'true';
 
 	const headerParams = {
@@ -33,7 +35,7 @@ const StandaloneDebot: FC<IStandaloneDebotProps> = props => {
 		<Provider store={store}>
 			<HeaderParamsContext.Provider value={headerParams}>
 				<DebotParamsContext.Provider value={debotParams}>
-					<App>
+					<App initialNetwork={network}>
 						<Debot address={debotaddress} />
 					</App>
 				</DebotParamsContext.Provider>
@@ -45,6 +47,7 @@ const StandaloneDebot: FC<IStandaloneDebotProps> = props => {
 StandaloneDebot.propTypes = {
 	debotaddress: PropTypes.string.isRequired,
 	hiderestart: PropTypes.string,
+	network: PropTypes.string,
 }
 
 export default StandaloneDebot;

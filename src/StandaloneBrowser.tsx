@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import store from '/src/store';
 import { App, Browser } from '/src/components';
+import { MAIN_NETWORK } from '/src/constants';
 import { HeaderParamsContext, DebotOnlyContext, DebotParamsContext } from '/src/contexts';
 
 interface IStandaloneBrowserProps {
@@ -13,10 +14,18 @@ interface IStandaloneBrowserProps {
 	hideenv?: string;
 	hiderestart?: string;
 	hidesave?: string;
+	network?: string;
 }
 
 const StandaloneBrowser: FC<IStandaloneBrowserProps> = props => {
-	const { hideenv, hiderestart, hidesave, debotonly, debotaddress } = props;
+	const {
+		hideenv,
+		hiderestart,
+		hidesave,
+		debotonly,
+		debotaddress,
+		network = MAIN_NETWORK,
+	} = props;
 	const isDebotOnly = debotonly === 'true' && !!debotaddress;
 	const isHideEnv = hideenv === 'true';
 	const isHideRestart = hiderestart === 'true';
@@ -38,7 +47,7 @@ const StandaloneBrowser: FC<IStandaloneBrowserProps> = props => {
 				<HeaderParamsContext.Provider value={headerParams}>
 					<DebotOnlyContext.Provider value={isDebotOnly}>
 						<DebotParamsContext.Provider value={debotParams}>
-							<App initialDebotAddress={debotaddress}>
+							<App initialNetwork={network} initialDebotAddress={debotaddress}>
 								<Browser />
 							</App>
 						</DebotParamsContext.Provider>
@@ -55,6 +64,7 @@ StandaloneBrowser.propTypes = {
 	hideenv: PropTypes.string,
 	hiderestart: PropTypes.string,
 	hidesave: PropTypes.string,
+	network: PropTypes.string,
 }
 
 export default StandaloneBrowser;

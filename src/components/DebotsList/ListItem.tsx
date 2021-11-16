@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import tonClientController from '/src/TonClient';
+import TonClient from '/src/TonClient';
 import { Link } from 'react-router-dom';
 import { createDebotUrl } from '/src/helpers';
 import { NetworkIcon } from '/src/components/icons';
@@ -16,7 +16,7 @@ const ListItem: FC<TProps> = ({ debot, isGrey }) => {
 
 	const handleNetworkSwitch = () => {
 		if (debot.network)
-			tonClientController.setSelectedNetwork(debot.network);
+			TonClient.setSelectedNetwork(debot.network);
 	}
 
 	return (

@@ -1,5 +1,5 @@
 import { AbiContract } from '@tonclient/core';
-import tonClientController from '/src/TonClient';
+import TonClient from '/src/TonClient';
 import EventBus from '/src/EventBus';
 import { EVENTS } from '/src/constants/events';
 import { IDebotInterfaceParams, TExtendedDebotInterfaceParams } from '../types';
@@ -20,7 +20,7 @@ abstract class BaseInterface implements IBaseInterface {
 
 	async call(params: IDebotInterfaceParams): Promise<void> {
 		try {
-			const decodedMessage = await tonClientController.client.abi.decode_message({
+			const decodedMessage = await TonClient.client.abi.decode_message({
 				abi: {
 					type: 'Contract',
 					value: this.abi,

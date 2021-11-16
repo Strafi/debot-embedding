@@ -2,6 +2,8 @@ import React, { useEffect, FC, useContext } from 'react';
 
 import { DEngine } from '/src/debot';
 import { useDispatch } from '/src/store/hooks';
+import EventBus from '/src/EventBus';
+import { EVENTS } from '/src/constants/events';
 import { clearStage, setIsDebotError } from '/src/store/actions/debot';
 import { DebotParamsContext } from '/src/contexts';
 import Stage from './Stage';
@@ -23,7 +25,12 @@ const Debot: FC<TProps> = ({ address, isEventsOnly }) => {
 			DEngine.runDebot(address)
 				.catch(err => {
 					dispatch(setIsDebotError(true));
+
 					console.error('Error while running debot: ', err);
+
+					EventBus.dispatch(EVENTS.DEBOT.RUN_FAILED, {
+						data: err,
+					});
 				});
 		}
 

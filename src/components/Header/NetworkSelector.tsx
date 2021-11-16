@@ -1,22 +1,22 @@
 import React, { useState, useEffect, FC } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 
-import tonClientController from '/src/TonClient';
+import TonClient from '/src/TonClient';
 import {  MainNetIcon, DevNetIcon, FldNetIcon, NetworkIcon } from '/src/components/icons';
 import { OptionsList } from '/src/components';
 import { MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK } from '/src/constants';
 import './index.scss';
 
 const HeaderNetworkSelector: FC = () => {
-	const [selectedNetwork, setSelectedNetwork] = useState(tonClientController.selectedNetwork);
+	const [selectedNetwork, setSelectedNetwork] = useState(TonClient.selectedNetwork);
 	const match = useRouteMatch('/debot');
 
 	useEffect(() => {
-		setSelectedNetwork(tonClientController.selectedNetwork);
+		setSelectedNetwork(TonClient.selectedNetwork);
 	}, [match]);
 
 	const handleSelectNetwork = (network: string): void => {
-		tonClientController.setSelectedNetwork(network);
+		TonClient.setSelectedNetwork(network);
 		setSelectedNetwork(network);
 	};
 

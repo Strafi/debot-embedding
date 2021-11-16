@@ -6,7 +6,7 @@ import {
 
 import store from '/src/store';
 import WalletService from '/src/WalletService';
-import tonClientController from '/src/TonClient';
+import TonClient from '/src/TonClient';
 import { DEngine } from '/src/debot';
 import EventBus, { TApproveDispatchType } from '/src/EventBus';
 import { EVENTS } from '/src/constants/events';
@@ -118,7 +118,7 @@ class DebotBrowser implements IDebotBrowser {
 
 	async send(params: ParamsOfAppDebotBrowserSend): Promise<void> {
 		try {
-			const parsedMessage = await tonClientController.client.boc.parse_message({ boc: params.message })
+			const parsedMessage = await TonClient.client.boc.parse_message({ boc: params.message })
 
 			const { dst, src, dst_workchain_id } = parsedMessage.parsed;
 			const [, interfaceId] = dst.split(':');
@@ -217,7 +217,7 @@ class DebotBrowser implements IDebotBrowser {
 			sign,
 		}
 
-		const signingBoxRegistration = await tonClientController.client.crypto.register_signing_box(signingBoxCreationObj);
+		const signingBoxRegistration = await TonClient.client.crypto.register_signing_box(signingBoxCreationObj);
 
 		return signingBoxRegistration.handle;
 	}
@@ -232,7 +232,7 @@ class DebotBrowser implements IDebotBrowser {
 
 		const keys = await keysPromise;
 
-		const { handle } = await tonClientController.client.crypto.get_signing_box(keys);
+		const { handle } = await TonClient.client.crypto.get_signing_box(keys);
 
 		store.dispatch(setSigningBox(null));
 

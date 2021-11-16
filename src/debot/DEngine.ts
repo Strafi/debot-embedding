@@ -3,7 +3,7 @@ import { DebotModule, RegisteredDebot, CallSet } from '@tonclient/core';
 import store from '/src/store';
 import EventBus, { TDebotDispatchType } from '/src/EventBus';
 import WalletService from '/src/WalletService';
-import tonClientController from '/src/TonClient';
+import TonClient from '/src/TonClient';
 import { formDebotFunctionFromId, interfaceAddressToId } from '/src/helpers';
 import { EVENTS } from '/src/constants/events';
 import { COMPONENTS_BINDINGS, DEV_NETWORK, FLD_NETWORK } from '/src/constants';
@@ -25,9 +25,9 @@ interface IDEngine {
 
 class DEngine implements IDEngine {
 	storage = new Map<string, IDEngineStorageItem>();
-	private mainDebotModule = new DebotModule(tonClientController.mainNetClient);
-	private devDebotModule = new DebotModule(tonClientController.devNetClient);
-	private fldDebotModule = new DebotModule(tonClientController.fldNetClient);
+	private mainDebotModule = new DebotModule(TonClient.mainNetClient);
+	private devDebotModule = new DebotModule(TonClient.devNetClient);
+	private fldDebotModule = new DebotModule(TonClient.fldNetClient);
 
 	constructor() {
 		EventBus.register(EVENTS.CLIENT.EXECUTE_FUNCTION, (args: TDebotDispatchType) => {
@@ -54,10 +54,10 @@ class DEngine implements IDEngine {
 	}
 
 	get debotModule() {
-		if (tonClientController.selectedNetwork === DEV_NETWORK)
+		if (TonClient.selectedNetwork === DEV_NETWORK)
 			return this.devDebotModule;
 
-		if (tonClientController.selectedNetwork === FLD_NETWORK)
+		if (TonClient.selectedNetwork === FLD_NETWORK)
 			return this.fldDebotModule;
 
 		return this.mainDebotModule;
@@ -115,7 +115,7 @@ class DEngine implements IDEngine {
 			}
 		}
 
-		const encodedMessage = await tonClientController.client.abi.encode_internal_message({
+		const encodedMessage = await TonClient.client.abi.encode_internal_message({
 			abi: {
 				type: 'Json',
 				value: debot_abi,
