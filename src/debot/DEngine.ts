@@ -1,7 +1,7 @@
 import { DebotModule, RegisteredDebot, CallSet } from '@tonclient/core';
 
 import store from '/src/store';
-import EventBus, { TDispatchType } from '/src/EventBus';
+import EventBus, { TDebotDispatchType } from '/src/EventBus';
 import WalletService from '/src/WalletService';
 import tonClientController from '/src/TonClient';
 import { formDebotFunctionFromId, interfaceAddressToId } from '/src/helpers';
@@ -30,7 +30,7 @@ class DEngine implements IDEngine {
 	private fldDebotModule = new DebotModule(tonClientController.fldNetClient);
 
 	constructor() {
-		EventBus.register(EVENTS.CLIENT.EXECUTE_FUNCTION, (args: TDispatchType) => {
+		EventBus.register(EVENTS.CLIENT.EXECUTE_FUNCTION, (args: TDebotDispatchType) => {
 			try {
 				const { debotAddress, interfaceId, functionId, data } = args;
 

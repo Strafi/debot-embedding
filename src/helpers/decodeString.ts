@@ -17,4 +17,4 @@ const decodeStringWithLogger: TDecodeString = function (encodedString) {
 	return decodedString;
 }
 
-export default decodeStringWithLogger;
+export default decodeString;

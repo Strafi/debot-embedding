@@ -8,6 +8,7 @@ import { EVENTS } from '/src/constants/events';
 import { DEBOT_INTERFACE_ID } from '/src/constants/debot';
 import StandaloneBrowser from '/src/StandaloneBrowser';
 import StandaloneDebot from '/src/StandaloneDebot';
+import StandaloneDebotEvents from '/src/StandaloneDebotEvents';
 import EventBus, { IEventBus } from '/src/EventBus';
 import { decodeString, TDecodeString } from '/src/helpers/decodeString';
 import encodeString, { TEncodeString } from '/src/helpers/encodeString';
@@ -16,6 +17,7 @@ import '/src/styles/normalize.scss';
 
 window.customElements.define("standalone-browser", reactToWebComponent(StandaloneBrowser, React, ReactDOM) as any);
 window.customElements.define("standalone-debot", reactToWebComponent(StandaloneDebot, React, ReactDOM) as any);
+window.customElements.define("standalone-debot-events", reactToWebComponent(StandaloneDebotEvents, React, ReactDOM) as any);
 
 declare global {
     interface Window {

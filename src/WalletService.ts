@@ -2,6 +2,8 @@ import CrystallWalletProvider, { hasTonProvider, Permissions, ProviderApiRespons
 
 import store from '/src/store';
 import DEngine from '/src/debot/DEngine';
+import EventBus from '/src/EventBus';
+import { EVENTS } from '/src/constants/events';
 import { setWallet } from '/src/store/actions/account';
 import { DEBOT_ADDRESS_SEARCH_PARAM } from '/src/constants';
 
@@ -39,6 +41,10 @@ class WalletService implements IWalletService {
 		const hasProvider = await hasTonProvider();
 
 		if (!hasProvider) {
+			EventBus.dispatch(EVENTS.WALLET.CONNECTION_ERROR, {
+				data: { message: WalletErrors.NO_PROVIDER, type: 'NO_PROVIDER' },
+			});
+
 			throw new Error(WalletErrors.NO_PROVIDER);
 		}
 
@@ -50,15 +56,27 @@ class WalletService implements IWalletService {
 			});
 	
 			if (!accountInteraction) {
+				EventBus.dispatch(EVENTS.WALLET.CONNECTION_ERROR, {
+					data: { message: WalletErrors.INSUFFICIENT_PERMISSIONS, type: 'INSUFFICIENT_PERMISSIONS' },
+				});
+
 				throw new Error(WalletErrors.INSUFFICIENT_PERMISSIONS);
 			}
 	
 			this.subscribeOnPermissions();
 	
 			this.setConnectionStatus(true);
+
+			EventBus.dispatch(EVENTS.WALLET.CONNECTED, {
+				data: accountInteraction,
+			});
 	
 			return this.formWalletData(accountInteraction) as TWalletData;
 		} catch (err) {
+			EventBus.dispatch(EVENTS.WALLET.CONNECTION_ERROR, {
+				data: { message: WalletErrors.INSUFFICIENT_PERMISSIONS, type: 'INSUFFICIENT_PERMISSIONS' },
+			});
+
 			throw new Error(WalletErrors.INSUFFICIENT_PERMISSIONS);
 		}
 	}
@@ -72,6 +90,8 @@ class WalletService implements IWalletService {
 
 			store.dispatch(setWallet(null));
 			this.setConnectionStatus(false);
+
+			EventBus.dispatch(EVENTS.WALLET.DISCONNECTED);
 		} catch(err) {
 			console.error(err);
 		}
@@ -133,6 +153,10 @@ class WalletService implements IWalletService {
 
 					if (debotAddress)
 						DEngine.reloadDebot(debotAddress);
+
+					EventBus.dispatch(EVENTS.WALLET.PERMISSIONS_CHANGED, {
+						data: event.permissions.accountInteraction,
+					});
 
 					store.dispatch(setWallet(this.formWalletData(event.permissions.accountInteraction)));
 				});

@@ -12,9 +12,10 @@ import './index.scss';
 
 type TProps = {
 	initialDebotAddress?: string;
+	isEventsOnly?: boolean;
 }
 
-const App: FC<TProps> = ({ children, initialDebotAddress }) => {
+const App: FC<TProps> = ({ children, initialDebotAddress, isEventsOnly }) => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const isDebotOnly = useContext(DebotOnlyContext);
@@ -46,7 +47,10 @@ const App: FC<TProps> = ({ children, initialDebotAddress }) => {
 		onMount();
 	}, []);
 
-	const isScrollDisabled = isSigningBoxVisible || isApproveWindowVisible || isConnectWalletModalVisible; // 
+	if (isEventsOnly)
+		return (<>{children}</>);
+
+	const isScrollDisabled = isSigningBoxVisible || isApproveWindowVisible || isConnectWalletModalVisible;
 	const appClassNames = `debot-embedding ${isCustomScrollBar() ? 'with-custom-scrollbar' : ''} ${isScrollDisabled ? 'debot-embedding--scroll-disabled' : ''}`;
 
 	return (

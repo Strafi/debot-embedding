@@ -1,7 +1,6 @@
 import {
 	RegisteredDebot,
 	RegisteredSigningBox,
-	AppDebotBrowser,
 	KeyPair,
 } from '@tonclient/core';
 
@@ -9,6 +8,8 @@ import store from '/src/store';
 import WalletService from '/src/WalletService';
 import tonClientController from '/src/TonClient';
 import { DEngine } from '/src/debot';
+import EventBus, { TApproveDispatchType } from '/src/EventBus';
+import { EVENTS } from '/src/constants/events';
 import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
 import { pushItemToStage } from '/src/store/actions/debot';
 import { setSigningBox, setApproveWindow } from '/src/store/actions/debot';
@@ -102,7 +103,13 @@ class DebotBrowser implements IDebotBrowser {
 	}
 
 	async get_signing_box(): Promise<ResultOfAppDebotBrowserGetSigningBox> {
-		return { signing_box: this.signingBoxHandle! };
+		const returnObject = { signing_box: this.signingBoxHandle! };
+
+		EventBus.dispatch(EVENTS.DEBOT.SIGNING_BOX_CALLED, {
+			data: returnObject,
+		});
+	
+		return returnObject;
 	}
 
 	async invoke_debot(): Promise<void> {
@@ -160,14 +167,32 @@ class DebotBrowser implements IDebotBrowser {
 	}
 
 	async approve(params: ParamsOfAppDebotBrowserApprove): Promise<ResultOfAppDebotBrowserApprove> {
+		let approvePromiseResolve: Function;
+
 		const approvePromise: Promise<boolean> = new Promise((resolve) => {
+			approvePromiseResolve = resolve;
+
 			store.dispatch(setApproveWindow({
 				submit: resolve,
 				params: params.activity,
 			}));
 		});
 
+		const registry = EventBus.register(EVENTS.CLIENT.EXECUTE_APPROVE, (args: TApproveDispatchType) => {
+			if (args?.data?.approved) {
+				approvePromiseResolve(true)
+			} else {
+				approvePromiseResolve(false)
+			}
+		});
+		
+		EventBus.dispatch(EVENTS.DEBOT.APPROVE_CALLED, {
+			data: params.activity,
+		});
+
 		const approved = await approvePromise;
+
+		registry.unregister();
 
 		store.dispatch(setApproveWindow(null));
 

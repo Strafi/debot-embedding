@@ -11,9 +11,10 @@ import './index.scss';
 
 type TProps = {
 	address: string;
+	isEventsOnly?: boolean;
 }
 
-const Debot: FC<TProps> = ({ address }) => {
+const Debot: FC<TProps> = ({ address, isEventsOnly }) => {
 	const dispatch = useDispatch();
 	const debotParams = useContext(DebotParamsContext);
 
@@ -30,6 +31,9 @@ const Debot: FC<TProps> = ({ address }) => {
 			dispatch(clearStage());
 		}
 	}, [address, dispatch]);
+
+	if (isEventsOnly)
+		return null;
 
 	return (
 		<div className='debot'>

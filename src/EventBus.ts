@@ -11,14 +11,23 @@ export interface ISubscriber {
 }
 
 export type TDispatchType = {
-	interfaceId: string;
-	debotAddress: string;
-	functionId?: string;
 	data?: any;
 }
 
+export type TApproveDispatchType = {
+	data?: {
+		approved?: boolean; 
+	}
+}
+
+export type TDebotDispatchType = {
+	interfaceId: string;
+	debotAddress: string;
+	functionId?: string;
+} & TDispatchType
+
 export interface IEventBus {
-	dispatch(event: string, args?: TDispatchType): void;
+	dispatch(event: string, args?: TDispatchType | TDebotDispatchType | TApproveDispatchType): void;
 	register(event: string, callback: Function): IRegistry;
 }
 
@@ -30,7 +39,7 @@ class EventBus implements IEventBus {
 		this.subscribers = {};
 	}
   
-	public dispatch(event: string, args?: TDispatchType): void {
+	public dispatch(event: string, args?: TDispatchType | TDebotDispatchType | TApproveDispatchType): void {
 		const subscriber = this.subscribers[event];
 
 		if (subscriber === undefined) {
