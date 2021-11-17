@@ -1,6 +1,6 @@
 {
   "name": "debot-web-embedding",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "license": "MIT",
   "dependencies": {
@@ -22,9 +22,10 @@
   "scripts": {
     "start": "vite",
     "serve": "vite preview",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc && vite build",
     "update-wasm": "cp ./node_modules/@tonclient/lib-web/tonclient.wasm static"
   },
+  "types": "lib/types.d.ts",
   "files": [
     "lib"
   ],

@@ -1,4 +1,4 @@
-import { TWalletData } from "/src/WalletService";
+import { TWalletData } from '/src/WalletService';
 import { TDebotsListItem, TDebotStageItem, TApproveWindow, TSigningBox, Dictionary } from '/src/types';
 
 export type TReduxAction<PayloadType> = (payload: PayloadType) => ({
