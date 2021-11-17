@@ -2,6 +2,7 @@ import React, { useEffect, FC, useContext } from 'react';
 
 import { DEngine } from '/src/debot';
 import { useDispatch } from '/src/store/hooks';
+import WalletService from '/src/WalletService';
 import EventBus from '/src/EventBus';
 import { EVENTS } from '/src/constants/events';
 import { clearStage, setIsDebotError } from '/src/store/actions/debot';
@@ -22,6 +23,8 @@ const Debot: FC<TProps> = ({ address, isEventsOnly }) => {
 
 	useEffect(() => {
 		if (address) {
+			WalletService.setRunningDebotAddress(address);
+
 			DEngine.runDebot(address)
 				.catch(err => {
 					dispatch(setIsDebotError(true));
@@ -36,6 +39,8 @@ const Debot: FC<TProps> = ({ address, isEventsOnly }) => {
 
 		return () => {
 			dispatch(clearStage());
+
+			WalletService.setRunningDebotAddress(undefined);
 		}
 	}, [address, dispatch]);
 

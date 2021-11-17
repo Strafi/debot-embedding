@@ -3,14 +3,17 @@ import {
 	RegisteredSigningBox,
 	KeyPair,
 } from '@tonclient/core';
+import { hasTonProvider } from 'ton-inpage-provider';
+import { isMobile } from 'react-device-detect';
 
 import store from '/src/store';
 import WalletService from '/src/WalletService';
 import TonClient from '/src/TonClient';
 import { DEngine } from '/src/debot';
-import EventBus, { TApproveDispatchType } from '/src/EventBus';
+import EventBus, { TApproveDispatchType, TRegisterSigningBoxDispatchType } from '/src/EventBus';
 import { EVENTS } from '/src/constants/events';
 import { COMPONENTS_BINDINGS, DEBOT_WC } from '/src/constants';
+import { genKeyPairFromMnemonic } from '/src/helpers';
 import { pushItemToStage } from '/src/store/actions/debot';
 import { setSigningBox, setApproveWindow } from '/src/store/actions/debot';
 import InterfacesController from './interfaces';
@@ -35,7 +38,13 @@ class DebotBrowser implements IDebotBrowser {
 	private interfacesQueue: TInterfacesQueueItem[] = [];
 
 	async init(): Promise<void> {
-		this.signingBoxHandle = await this.registerSigningBox();
+		const shouldRegDefaultBox = isMobile && !await hasTonProvider();
+
+		if (shouldRegDefaultBox) {
+			this.signingBoxHandle = await this.registerDefaultSigningBox();
+		} else {
+			this.signingBoxHandle = await this.registerSigningBox();
+		}
 	}
 
 	setDebotParams(params: RegisteredDebot): void {
@@ -222,21 +231,57 @@ class DebotBrowser implements IDebotBrowser {
 		return signingBoxRegistration.handle;
 	}
 
-	// alternative version w\o extension
-	private async get_default_signing_box() {
+	// alternative version w\o extension (for mobile devices)
+	private async registerDefaultSigningBox() {
+		let signingKeysPromiseResolve: Function;
+
 		const keysPromise: Promise<KeyPair> = new Promise((resolve) => {
+			signingKeysPromiseResolve = resolve;
+
 			store.dispatch(setSigningBox({
 				submit: resolve,
 			}));
 		});
 
-		const keys = await keysPromise;
+		const registry = EventBus.register(EVENTS.CLIENT.REGISTER_SIGNING_BOX, async (args: TRegisterSigningBoxDispatchType) => {
+			let keyPair: { secret: string, public: string } | undefined;
 
-		const { handle } = await TonClient.client.crypto.get_signing_box(keys);
+			if (args?.data?.mnemonic) {
+				keyPair = await genKeyPairFromMnemonic(args.data.mnemonic);
+			}
 
-		store.dispatch(setSigningBox(null));
+			if (args?.data?.keys) {
+				keyPair = args.data.keys;
+			}
 
-		return { signing_box: handle };
+			if (keyPair) {
+				signingKeysPromiseResolve(keyPair);
+			} else {
+				signingKeysPromiseResolve(null);
+			}
+		});
+
+		EventBus.dispatch(EVENTS.DEBOT.SIGNING_BOX_REGISTRATION_CALLED);
+
+		try {
+			const keys = await keysPromise;
+
+			const { handle } = await TonClient.client.crypto.get_signing_box(keys);
+
+			registry.unregister();
+	
+			EventBus.dispatch(EVENTS.DEBOT.SIGNING_BOX_REGISTERED, {
+				data: { signing_box: handle },
+			});
+	
+			store.dispatch(setSigningBox(null));
+	
+			return handle;
+		} catch (err) {
+			EventBus.dispatch(EVENTS.DEBOT.SIGNING_BOX_REGISTRATION_FAILED, {
+				data: err,
+			});
+		}
 	}
 
 	private showDeprecatedMessage(): void {

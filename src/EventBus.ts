@@ -20,6 +20,16 @@ export type TApproveDispatchType = {
 	}
 }
 
+export type TRegisterSigningBoxDispatchType = {
+	data?: {
+		keys?: {
+			public: string,
+			secret: string,
+		};
+		mnemonic?: string;
+	}
+}
+
 export type TDebotDispatchType = {
 	interfaceId: string;
 	debotAddress: string;
@@ -27,7 +37,7 @@ export type TDebotDispatchType = {
 } & TDispatchType
 
 export interface IEventBus {
-	dispatch(event: string, args?: TDispatchType | TDebotDispatchType | TApproveDispatchType): void;
+	dispatch(event: string, args?: TDispatchType | TDebotDispatchType | TApproveDispatchType | TRegisterSigningBoxDispatchType): void;
 	register(event: string, callback: Function): IRegistry;
 }
 
@@ -39,7 +49,7 @@ class EventBus implements IEventBus {
 		this.subscribers = {};
 	}
   
-	public dispatch(event: string, args?: TDispatchType | TDebotDispatchType | TApproveDispatchType): void {
+	public dispatch(event: string, args?: TDispatchType | TDebotDispatchType | TApproveDispatchType | TRegisterSigningBoxDispatchType): void {
 		const subscriber = this.subscribers[event];
 
 		if (subscriber === undefined) {

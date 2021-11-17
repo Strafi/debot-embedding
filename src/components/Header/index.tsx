@@ -1,4 +1,6 @@
-import React, { useContext, FC } from 'react';
+import React, { useContext, FC, useLayoutEffect, useState } from 'react';
+import { hasTonProvider } from 'ton-inpage-provider';
+import { isMobile } from 'react-device-detect';
 
 import { HeaderParamsContext, DebotOnlyContext, DebotParamsContext } from '/src/contexts';
 import SearchBar from '../SearchBar';
@@ -16,13 +18,22 @@ const defaultParams = {
 };
 
 const Header: FC = () => {
+	const [hideAccountBecauseNoProvider, setHideAccountBecauseNoProvider] = useState(false);
 	const isDebotOnly = useContext(DebotOnlyContext);
 	const headerParams = useContext(HeaderParamsContext);
 	const debotParams = useContext(DebotParamsContext);
 	const hideBackButton = headerParams?.hideBackButton || defaultParams.hideBackButton;
 	const hideSearchBar = headerParams?.hideSearchBar || defaultParams.hideSearchBar;
 	const hideNetworkSelector = headerParams?.hideNetworkSelector || defaultParams.hideNetworkSelector;
-	const hideAccount = headerParams?.hideAccount || defaultParams.hideAccount;
+	const hideAccount = headerParams?.hideAccount || defaultParams.hideAccount || hideAccountBecauseNoProvider;
+
+	useLayoutEffect(() => {
+		const asyncOnMount = async () => {
+			setHideAccountBecauseNoProvider(isMobile && !await hasTonProvider());
+		}
+
+		asyncOnMount();
+	}, []);
 
 	const renderSearchBarComponents = () => (
 		<>

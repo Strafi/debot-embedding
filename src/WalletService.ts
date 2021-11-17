@@ -1,4 +1,4 @@
-import CrystallWalletProvider, { hasTonProvider, Permissions, ProviderApiResponse } from 'ton-inpage-provider';
+import { hasTonProvider, Permissions, ProviderApiResponse, ProviderRpcClient } from 'ton-inpage-provider';
 
 import store from '/src/store';
 import DEngine from '/src/debot/DEngine';
@@ -21,21 +21,23 @@ export type TWalletData = {
 export interface IWalletService {
 	isConnected: boolean;
 	isPermissionsSubscribed: boolean;
-	responseToConnectionWaiter: null | ((value?: unknown) => void);
-	rejectToConnectionWaiter: null | ((reason?: any) => void);
 	connect: () => Promise<TWalletData>;
 	disconnect: () => Promise<void>;
 	getProviderState: () => Promise<ProviderApiResponse<'getProviderState'>>;
 	sign: (data: string, publicKey: string) => Promise<any>;
 	waitForConnection: () => Promise<unknown>;
 	rejectWaitingConnections: () => void;
+	setRunningDebotAddress: (debotAddress?: string) => void;
 }
+
+const CrystallWalletProvider = new ProviderRpcClient();
 
 class WalletService implements IWalletService {
 	isConnected = false;
 	isPermissionsSubscribed = false;
-	responseToConnectionWaiter: null | ((value?: unknown) => void) = null;
-	rejectToConnectionWaiter: null | ((reason?: any) => void) = null;
+	private responseToConnectionWaiter: null | ((value?: unknown) => void) = null;
+	private rejectToConnectionWaiter: null | ((reason?: any) => void) = null;
+	private currentDebotAddress: string | undefined;
 
 	async connect(): Promise<TWalletData> {
 		const hasProvider = await hasTonProvider();
@@ -103,9 +105,8 @@ class WalletService implements IWalletService {
 		return currentProviderState;
 	}
 
-	async sign(data: string, publicKey: string): Promise<any> {
-		//@ts-ignore signData exists but somewhy it is not described in rawApi type
-		const signed = await CrystallWalletProvider.rawApi.signData({ data, publicKey });
+	async sign(data: string, publicKey: string): Promise<ProviderApiResponse<'signDataRaw'>> {
+		const signed = await CrystallWalletProvider.rawApi.signDataRaw({ data, publicKey });
 
 		return signed;
 	}
@@ -125,6 +126,10 @@ class WalletService implements IWalletService {
 
 			this.rejectToConnectionWaiter = null;
 		}
+	}
+
+	setRunningDebotAddress(debotAddress?: string): void {
+		this.currentDebotAddress = debotAddress;
 	}
 
 	private setConnectionStatus(isConnected: boolean): void {
@@ -149,7 +154,7 @@ class WalletService implements IWalletService {
 					this.isConnected = !!event.permissions.accountInteraction;
 
 					const searchParams = new URLSearchParams(window.location.search);
-					const debotAddress = searchParams.get(DEBOT_ADDRESS_SEARCH_PARAM);
+					const debotAddress = searchParams.get(DEBOT_ADDRESS_SEARCH_PARAM) || this.currentDebotAddress;
 
 					if (debotAddress)
 						DEngine.reloadDebot(debotAddress);

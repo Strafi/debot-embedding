@@ -7,20 +7,21 @@
     "@tonclient/lib-web": "^1.24.0",
     "history": "^5.0.0",
     "react": "^17.0.1",
+    "react-device-detect": "^2.1.2",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-to-webcomponent": "^1.5.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "ton-inpage-provider": "0.1.18",
+    "ton-inpage-provider": "0.2.3",
     "typescript": "^4.4.4"
   },
   "scripts": {
     "start": "vite",
     "serve": "vite preview",
     "build": "tsc && VITE_NODE_ENV=production vite build",
-    "update-wasm": "cp ./node_modules/@tonclient/lib-web/tonclient.wasm public"
+    "update-wasm": "cp ./node_modules/@tonclient/lib-web/tonclient.wasm static"
   },
   "browserslist": {
     "production": [
