@@ -354,7 +354,7 @@
   resolved "https://registry.yarnpkg.com/@tonclient/lib-web/-/lib-web-1.25.0.tgz#4a1231092a647a1a3780904f56ac752a96260015"
   integrity sha512-BHRCj4TGsjyDpWJUqhxGNACdGlzdt6/AsMX4btN4IX9EeBvvCXEMxH3kbmPJYIyn3xt43vKKTZSakl0vTynZfQ==
 
-"@types/history@*":
+"@types/history@*", "@types/history@^4.7.9":
   version "4.7.9"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.9.tgz#1cfb6d60ef3822c589f18e70f8b12f9a28ce8724"
   integrity sha512-MUc6zSmU3tEVnkQ78q0peeEjKWPUADMlC/t++2bI8WnAG2tvYRPIgHG8lWkXwqc8MsUF6Z2MOf+Mh5sazOmhiQ==

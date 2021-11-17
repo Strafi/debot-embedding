@@ -1,6 +1,6 @@
 {
-  "name": "debot-browser-web-components",
-  "version": "1.0.0",
+  "name": "debot-web-embedding",
+  "version": "0.0.1",
   "private": false,
   "dependencies": {
     "@tonclient/core": "^1.24.0",
@@ -20,7 +20,7 @@
   "scripts": {
     "start": "vite",
     "serve": "vite preview",
-    "build": "tsc && VITE_NODE_ENV=production vite build",
+    "build": "tsc && vite build",
     "update-wasm": "cp ./node_modules/@tonclient/lib-web/tonclient.wasm static"
   },
   "browserslist": {
@@ -35,7 +35,17 @@
       "last 1 safari version"
     ]
   },
+  "files": ["lib"],
+  "main": "./lib/debot-web-embedding.umd.js",
+  "module": "./lib/debot-web-embedding.es.js",
+  "exports": {
+    ".": {
+      "import": "./lib/debot-web-embedding.es.js",
+      "require": "./lib/debot-web-embedding.umd.js"
+    }
+  },
   "devDependencies": {
+    "@types/history": "^4.7.9",
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",

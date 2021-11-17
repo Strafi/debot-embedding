@@ -2,6 +2,7 @@ import { TonClient } from '@tonclient/core';
 import { libWeb } from '@tonclient/lib-web';
 import { TON_NETWORK_LS_FIELD, MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK } from '/src/constants';
 
+//@ts-ignore
 TonClient.useBinaryLibrary(libWeb);
 
 interface ITonClientController {
