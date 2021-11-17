@@ -95,7 +95,7 @@ class DEngine implements IDEngine {
 
 	async callDebotFunction(
 		debotAddress: string,
-		interfaceAddress: string,
+		interfaceAddress?: string,
 		functionId?: string,
 		input?: unknown,
 	): Promise<void> {
@@ -130,7 +130,7 @@ class DEngine implements IDEngine {
 			const sendRes = await this.debotModule.send({ debot_handle, message: encodedMessage.message });
 
 			EventBus.dispatch(EVENTS.DEBOT.FUNCTION_EXECUTED, {
-				interfaceId: interfaceAddressToId(interfaceAddress),
+				interfaceId: interfaceAddress ? interfaceAddressToId(interfaceAddress) : undefined,
 				debotAddress,
 				functionId,
 				data: { call_set },
@@ -143,7 +143,7 @@ class DEngine implements IDEngine {
 			console.error(err);
 
 			EventBus.dispatch(EVENTS.DEBOT.FUNCTION_EXECUTION_FAILED, {
-				interfaceId: interfaceAddressToId(interfaceAddress),
+				interfaceId: interfaceAddress ? interfaceAddressToId(interfaceAddress) : undefined,
 				debotAddress,
 				functionId,
 				data: { call_set, message: (err as Error).message },
