@@ -1,7 +1,8 @@
 {
   "name": "debot-web-embedding",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
+  "license": "MIT",
   "dependencies": {
     "@tonclient/core": "^1.24.0",
     "@tonclient/lib-web": "^1.24.0",
@@ -15,27 +16,18 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "ton-inpage-provider": "0.2.3",
+    "tslib": "^2.3.1",
     "typescript": "^4.4.4"
   },
   "scripts": {
     "start": "vite",
     "serve": "vite preview",
-    "build": "tsc && vite build",
+    "build": "tsc --noEmit && vite build",
     "update-wasm": "cp ./node_modules/@tonclient/lib-web/tonclient.wasm static"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "main": "./lib/debot-web-embedding.umd.js",
   "module": "./lib/debot-web-embedding.es.js",
   "exports": {
@@ -44,7 +36,16 @@
       "require": "./lib/debot-web-embedding.umd.js"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Strafi/debot-embedding.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Strafi/debot-embedding/issues"
+  },
+  "homepage": "https://github.com/Strafi/debot-embedding",
   "devDependencies": {
+    "@rollup/plugin-typescript": "^8.3.0",
     "@types/history": "^4.7.9",
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.34",

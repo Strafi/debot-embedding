@@ -22,7 +22,7 @@ window.customElements.define("standalone-debot-events", reactToWebComponent(Stan
 declare global {
     interface Window {
 		DEBOT_EMBEDDING: {
-			EVENT_BUS: IEventBus,
+			EventBus: IEventBus,
 			EVENTS: typeof EVENTS;
 			DEBOT_INTERFACE_ID: typeof DEBOT_INTERFACE_ID;
 			encodeString: TEncodeString;
@@ -32,7 +32,7 @@ declare global {
 }
 
 window.DEBOT_EMBEDDING = {
-	EVENT_BUS: EventBus,
+	EventBus,
 	EVENTS,
 	DEBOT_INTERFACE_ID,
 	encodeString,
