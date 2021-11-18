@@ -14,26 +14,26 @@ web-sites.
 ### Using CDN
 Append the following line in your index.html, better in the `<head>` tag
 ```
-$ <script src="https://unpkg.com/debot-web-embedding"></script>
-$
-$ -------------------------- or as a module ----------------------------
-$
-$ <script type="module">
-$	import "https://unpkg.com/debot-web-embedding/lib/debot-web-embedding.es.js";
-$
-$	// or with imports
-$
-$ 	import * as DebotWebEmbeddingExports from "https://unpkg.com/debot-web-embedding/lib/debot-web-embedding.es.js";
-$ </script>
+<script src="https://unpkg.com/debot-web-embedding"></script>
+
+-------------------------- or as a module ----------------------------
+
+<script type="module">
+	import "https://unpkg.com/debot-web-embedding/lib/debot-web-embedding.es.js";
+
+	// or with imports
+
+ 	import * as DebotWebEmbeddingExports from "https://unpkg.com/debot-web-embedding/lib/debot-web-embedding.es.js";
+</script>
 ```
 Append the following line in your `<head>` tag to include library styles  
 ```
-$ <link rel="stylesheet" href="https://unpkg.com/debot-web-embedding/lib/style.css" />
+<link rel="stylesheet" href="https://unpkg.com/debot-web-embedding/lib/style.css" />
 ```
 This library uses Montserrat font by default. It is not mandatory, but you also can append these two lines to include original font.  
 ```
-$ <link rel="preconnect" href="https://fonts.gstatic.com" />  
-$ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" />
+<link rel="preconnect" href="https://fonts.gstatic.com" />  
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" />
 ```
 ### Using NPM
 Soon.  
@@ -80,20 +80,20 @@ Note: This is NO-UI component, which means that it will not render anything. The
 Provides interaction between DeBot and a web-site  
 ### Example
 ```
-$ <script>
-$ const { DEBOT, CLIENT } = window.DEBOT_EMBEDDING.EVENTS;
-$
-$ const registry = window.DEBOT_EMBEDDING.EventBus.register(DEBOT.APPROVE_CALLED, () => {
-$ 	const isApproved = // any logic to handle approve transaction process
-$
-$	window.DEBOT_EMBEDDING.EventBus.dispatch(CLIENT.EXECUTE_APPROVE, { data: { approved: isApproved } });
-$
-$	registry.unregister(); // optional - unregister handle when finished
-$ });
-$
-$ // will log every debot function call and its arguments
-$ window.DEBOT_EMBEDDING.EventBus.register(DEBOT.FUNCTION_CALLED, (args) => { console.log(args) });
-$ </script>
+<script>
+	const { DEBOT, CLIENT } = window.DEBOT_EMBEDDING.EVENTS;
+
+	const registry = window.DEBOT_EMBEDDING.EventBus.register(DEBOT.APPROVE_CALLED, () => {
+		const isApproved = // any logic to handle approve transaction process
+
+		window.DEBOT_EMBEDDING.EventBus.dispatch(CLIENT.EXECUTE_APPROVE, { data: { approved: isApproved } });
+
+		registry.unregister(); // optional - unregister handle when finished
+	});
+
+	// will log every debot function call and its arguments
+	window.DEBOT_EMBEDDING.EventBus.register(DEBOT.FUNCTION_CALLED, (args) => { console.log(args) });
+</script>
 ```  
 ### Events
 List of Events you can register for:  
@@ -159,10 +159,10 @@ The color palette  looks this way:
 
 If you want to change something, just re-defined CSS Variables in any css file or `<style>` tag this way:  
 ```
-$ .debot-embedding {
-$	--background-color: red;
-$ 	--disabled-color: blue;
-$ }
+.debot-embedding {
+	--background-color: red;
+	--disabled-color: blue;
+}
 ```
 ### Sizes
 Minimum recommended (but not mandatory) width and height of embedding slot for Desktop: width: 640px; height: 480px;  
@@ -177,7 +177,7 @@ It is possible to bind your own controls using StandaloneDebotEvents NO-UI compo
 ## Exports
 Library export object looks this way:
 ```
-$ export { EventBus, EVENTS, DEBOT_INTERFACE_ID, decodeString, encodeString }
+export { EventBus, EVENTS, DEBOT_INTERFACE_ID, decodeString, encodeString }
 ```
 where:
 * EventBus - provides lib-client interaction.
@@ -188,13 +188,13 @@ where:
 
 All of these exports are duplicated inside the `window` object:
 ```
-$ window.DEBOT_EMBEDDING = {
-$ 	EventBus,
-$	EVENTS,
-$	DEBOT_INTERFACE_ID,
-$	encodeString,
-$	decodeString,
-$ }
+window.DEBOT_EMBEDDING = {
+	EventBus,
+	EVENTS,
+	DEBOT_INTERFACE_ID,
+	encodeString,
+	decodeString,
+}
 ```
 ## How To Build
 ### Pre-requirements  
@@ -202,4 +202,7 @@ You need `node.js` and `yarn` or `npm` installed on your device.
 Clone the repository using git and navigate into it. Then, depending on which package manager you had installed, execute `yarn` or `npm install`.
 
 ### Build from source
-Depending on which package manager you had installed, execute `yarn build` or `npm run build`. This command will create a new lib (it will appear in the 'lib' folder).
+Depending on which package manager you had installed, execute `yarn build` or `npm run build`. This command will create a new lib (it will appear in the 'lib' folder).  
+
+## Licence
+MIT License
