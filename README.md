@@ -3,7 +3,7 @@
 The usage of traditional web is still massive and we can only dream of the Web Free
 concept becoming reality. We already have DeBots which provide users direct
 connection with blockchain. Though, user experience is still pretty limited - both by
-functionality and visualisation. What if we combine the traditional web navigation with
+functionality and visualization. What if we combine the traditional web navigation with
 built-in features of DeBots by injecting DeBot into web-pages. The interaction with
 them can be organized through browser extensions or wallets that support the
 technology.  
@@ -42,13 +42,13 @@ Soon.
 2. `<standalone-browser></standalone-browser>` web-component that provides browser application to your web page (ref: https://browser.freeton-stats.org/)
 3. `<standalone-debot-events></standalone-debot-events>` web-component that provides NO-UI single debot to use (you can build your own UI and show it depending on this component sent events)
 4. `EventBus` to provide interaction between DeBot and web-site
-5. Crystall Wallet integration to sign transactions
+5. Crystal Wallet integration to sign transactions
 6. Customization: 
    * Edit color pallete via CSS Variables
    * On/Off switching of particular control elements
    * DeBot address binding
    * Custom fields and controls/buttons (you can bind your own controls using StandaloneDebotEvents NO-UI component)
-7. TypeScript used
+7. TypeScript
 ## StandaloneDebot
 Provides single debot to use
 ### Properties
@@ -61,21 +61,21 @@ Note 2: Search Bar is disabled for this component. If you need it, you should be
 ## StandaloneBrowser
 Provides complete browser application to your web page
 ### Properties
-* `debotaddress` (Optional) - if passed, component will try to load debot with this address on mount.
-* `debotonly` (Optional) - if passed, will behave similar to StandaloneDebot, but with search bar and ability for user to enter another debot address.
+* `debotaddress` (Optional) - if passed, component will try to load DeBot with this address on mount.
+* `debotonly` (Optional) - if passed, will behave similar to StandaloneDebot, but with a search bar and the ability for a user to enter another DeBot address.
 * `hideenv` (Optional) - if passed, will hide "Environment" button.
-* `hiderestart` (Optional) - if passed, will hide "Restart DeBot" button.
-* `hidesave` (Optional) - if passed, will hide "Save DeBot" button.
-* `network` (Optional, default: main.ton.dev) - debot network.
+* `hiderestart` (Optional) - if passed, will hide the "Restart DeBot" button.
+* `hidesave` (Optional) - if passed, will hide the "Save DeBot" button.
+* `network` (Optional, default: main.ton.dev) - DeBot network.
 
 Note: see https://browser.freeton-stats.org/ for reference (the whole website is this single component)
 ## StandaloneDebotEvents
-Provides NO-UI single debot to use (you can build your own UI and show it depending on this component sent events)
+Provides NO-UI single DeBot to use (you can build your own UI and show it depending on this component sent events)
 ### Properties
-* `debotaddress` (Required) - debot address to run.
-* `network` (Optional, default: main.ton.dev) - debot network.
+* `debotaddress` (Required) - DeBot address to run.
+* `network` (Optional, default: main.ton.dev) - DeBot network.
 
-Note: This is NO-UI component, which means that it will not render anything. The only way to communicate with it is EventBus events. See below.
+Note: This is a NO-UI component, which means that it will not render anything. The only way to communicate with it is EventBus events. See below.
 ## EventBus
 Provides interaction between DeBot and a web-site  
 ### Example
@@ -98,30 +98,30 @@ Provides interaction between DeBot and a web-site
 ### Events
 List of Events you can register for:  
 * DeBot Module:  
-  * EVENTS.DEBOT.RUN_FAILED - triggered when debot run failed.
-  * EVENTS.DEBOT.FUNCTION_CALLED - triggered when debot function was called (subscribe on this event to show your custom UI in StandaloneDebotEvents).
-  * EVENTS.DEBOT.FUNCTION_EXECUTED - triggered when debot function was executed successfuly
-  * EVENTS.DEBOT.FUNCTION_EXECUTION_FAILED - triggered when debot function was executed with error
-  * EVENTS.DEBOT.SIGNING_BOX_REGISTRATION_CALLED - triggered when debot call signing box registration. (subscribe on this event to show your custom UI in StandaloneDebotEvents) (Note: triggered only when the use of Crystall Wallet is impossible)
-  * EVENTS.DEBOT.SIGNING_BOX_REGISTERED - triggered when debot signing box was registered with success (Note: triggered only when the use of Crystall Wallet is impossible)
-  * EVENTS.DEBOT.SIGNING_BOX_REGISTRATION_FAILED - triggered when debot signing box registration failed (Note: triggered only when the use of Crystall Wallet is impossible)
-  * EVENTS.DEBOT.SIGNING_BOX_CALLED - triggered when debot signing box called
-  * EVENTS.DEBOT.APPROVE_CALLED - triggered when debot approve function called (subscribe on this event to show your custom UI in StandaloneDebotEvents)
+  * EVENTS.DEBOT.RUN_FAILED - triggered when DeBot run failed.
+  * EVENTS.DEBOT.FUNCTION_CALLED - triggered when DeBot function was called (subscribe to this event to show your custom UI in StandaloneDebotEvents).
+  * EVENTS.DEBOT.FUNCTION_EXECUTED - triggered when DeBot function was executed successfully
+  * EVENTS.DEBOT.FUNCTION_EXECUTION_FAILED - triggered when DeBot function was executed with error
+  * EVENTS.DEBOT.SIGNING_BOX_REGISTRATION_CALLED - triggered when DeBot calls signing box registration. (subscribe to this event to show your custom UI in StandaloneDebotEvents) (Note: triggered only when the use of Crystal Wallet is impossible)
+  * EVENTS.DEBOT.SIGNING_BOX_REGISTERED - triggered when DeBot signing box was registered with success (Note: triggered only when the use of Crystal Wallet is impossible)
+  * EVENTS.DEBOT.SIGNING_BOX_REGISTRATION_FAILED - triggered when DeBot signing box registration failed (Note: triggered only when the use of Crystal Wallet is impossible)
+  * EVENTS.DEBOT.SIGNING_BOX_CALLED - triggered when DeBot signing box called
+  * EVENTS.DEBOT.APPROVE_CALLED - triggered when DeBot approve function called (subscribe to this event to show your custom UI in StandaloneDebotEvents)
 * Wallet Module:
-  * EVENTS.WALLET.CONNECTED - triggered when wallet was connected with success
-  * EVENTS.WALLET.CONNECTION_ERROR - triggered when wallet connection failed
-  * EVENTS.WALLET.PERMISSIONS_CHANGED - triggered when wallet permissions were changed
-  * EVENTS.WALLET.DISCONNECTED - triggered when wallet was disconnected 
+  * EVENTS.WALLET.CONNECTED - triggered when the wallet was connected with success
+  * EVENTS.WALLET.CONNECTION_ERROR - triggered when the wallet connection failed
+  * EVENTS.WALLET.PERMISSIONS_CHANGED - triggered when the wallet permissions were changed
+  * EVENTS.WALLET.DISCONNECTED - triggered when the wallet was disconnected 
 
-List of events you can dispatch from client (Client Module):  
-* EVENTS.CLIENT.EXECUTE_FUNCTION - dispatch this event to send payload for the DeBot function execution.
-* EVENTS.CLIENT.EXECUTE_APPROVE - dispatch this event to send payload for the DeBot approve function execution.
-* EVENTS.CLIENT.REGISTER_SIGNING_BOX - dispatch this event to send payload for the signing box registration.  
-## Crystall Wallet integration
-To reach the needed security level when creating and signing the transactions, Crystall Wallet web-extenstion and mobile app were integrated.
+List of events you can dispatch from the client (Client Module):  
+* EVENTS.CLIENT.EXECUTE_FUNCTION - dispatch this event to send a payload for the DeBot function execution.
+* EVENTS.CLIENT.EXECUTE_APPROVE - dispatch this event to send a payload for the DeBot approve function execution.
+* EVENTS.CLIENT.REGISTER_SIGNING_BOX - dispatch this event to send a payload for the signing box registration.  
+## Crystal Wallet integration
+To reach the needed security level when creating and signing the transactions, Crystal Wallet web-extension and mobile app were integrated.
 - Web extension: the keys should be stored in the extension and not
 transmitted to the browser. The extension is used for the UserInfo and SigningBoxInput interfaces, as well as for the creation of a signing box.
-- Mobile: wallet integration works via TON Crystall Wallet mobile app built-in browser. As for another browsers - well, for now the only way is to pass keys directly to the browser. But anyway, browser will not store anything.  
+- Mobile: wallet integration works via TON Crystal Wallet mobile app built-in browser. As for other browsers - well, for now, the only way is to pass keys directly to the browser. But anyway, the DeBot browser enginge will not store anything.  
 ## Customization
 ### Edit color pallete via CSS Variables  
 The color palette  looks this way:  
@@ -169,7 +169,7 @@ Minimum recommended (but not mandatory) width and height of embedding slot for D
 Maximum recommended width and height of embedding slot for Desktop: no limitations;
 Minimum recommended width and height of embedding slot for Mobile: width: 100%; height: 480px;
 ### On/Off switching of particular control elements
-StandaloneDebot and StandaloneBrowser web-components support `hideenv`, `hidesave` and `hiderestart` properties for this purpose. Also, you can toggle on or of the Search Bar (use StandaloneBrowser with `debotonly` property to show bar or just StandaloneDebot to hide);
+StandaloneDebot and StandaloneBrowser web-components support `hideenv`, `hidesave`, and `hiderestart` properties for this purpose. Also, you can toggle on or of the Search Bar (use StandaloneBrowser with `debotonly` property to show a bar or just StandaloneDebot to hide);
 ### DeBot address binding
 All of the provided web-components support `debotaddress` property for this purpose.
 ### Custom fields and controls/buttons
@@ -204,5 +204,5 @@ Clone the repository using git and navigate into it. Then, depending on which pa
 ### Build from source
 Depending on which package manager you had installed, execute `yarn build` or `npm run build`. This command will create a new lib (it will appear in the 'lib' folder).  
 
-## Licence
+## License
 MIT License
