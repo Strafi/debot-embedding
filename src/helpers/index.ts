@@ -9,6 +9,7 @@ export { default as formDebotFunctionFromId } from './formDebotFunctionFromId';
 export { default as generateRandomColor } from './generateRandomColor';
 export { default as genKeyPairFromMnemonic } from './genKeyPairFromMnemonic';
 export { default as getEnvVariableFromInput } from './getEnvVariableFromInput';
+export { default as getStaticAssetUrl } from './getStaticAssetUrl';
 export { default as removeLocalDebot } from './removeLocalDebot';
 export { default as removeEnvVariable } from './removeEnvVariable';
 export { default as interfaceAddressToId } from './interfaceAddressToId';

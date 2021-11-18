@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback, FC, ChangeEvent, MouseEvent } from 'react';
 import { useSelector } from '/src/store/hooks';
 import { addEnvVariable, removeEnvVariable, isCustomScrollBar } from '/src/helpers';
-import { CancelIcon } from '/src/components/icons';
+import { CancelIcon, EnvironmentIcon } from '/src/components/icons';
+
 import './index.scss';
 
 const Environment: FC = () => {
@@ -80,7 +81,7 @@ const Environment: FC = () => {
 							Here you can store something to use later (address or public key, for example).
 						</div>
 						<div className='environment__image--flex-container'>
-							<img src='/env-icon.svg' alt='Environment'/>
+							<EnvironmentIcon />
 							<div className='environment__image-text'>
 								You can access stored data as variables in inputs by adding the &apos;$&apos; prefix to key, or copy data to the clipboard by click on it.
 							</div>

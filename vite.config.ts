@@ -9,8 +9,12 @@ const resolvePath = (str: string) => path.resolve(__dirname, str);
 // https://vitejs.dev/config/
 export default defineConfig({
 	publicDir: 'static',
+	define: {
+		'__LIB_VERSION__': JSON.stringify(process.env.npm_package_version),
+	},
 	build: {
 		outDir: 'lib',
+		assetsInlineLimit: 32768,
 		lib: {
 			entry: resolvePath('index.ts'),
 			name: 'debot-web-embedding',

@@ -1,17 +1,8 @@
 import { DebotActivity } from '@tonclient/core';
 
-export * from './store/types';
-
-export type {
-	IRegistry,
-	ICallable,
-	ISubscriber,
-	TDispatchType,
-	TApproveDispatchType,
-	TRegisterSigningBoxDispatchType,
-	TDebotDispatchType,
-	IEventBus,
-} from './EventBus'
+export * from './EventBus'
+export type { encodeString, decodeString } from './helpers'
+export type { EVENTS, DEBOT_INTERFACE_ID } from './constants'
 
 export type TDebotsListItem = {
 	title: string,

@@ -104,9 +104,11 @@
 			margin-bottom: 20px;
 		}
 
-		img {
+		.environment-icon {
 			max-width: 120px;
 			max-height: 120px;
+			width: 100%;
+			height: auto;
 			margin-right: 30px;
 
 			@media (max-width: #{$mobile-checkpoint}) {

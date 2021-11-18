@@ -21,6 +21,8 @@ import {
 	COMPONENTS_BINDINGS,
 	MEDIA_STATUS,
 } from './stageComponents';
+import { EVENTS } from './events';
+import { DEBOT_INTERFACE_ID } from './debot';
 
 export {
 	COMPONENTS_BINDINGS,
@@ -38,4 +40,6 @@ export {
 	MAIN_NETWORK,
 	DEV_NETWORK,
 	FLD_NETWORK,
+	EVENTS,
+	DEBOT_INTERFACE_ID,
 }

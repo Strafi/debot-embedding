@@ -1,7 +1,8 @@
 {
   "name": "debot-web-embedding",
-  "version": "0.0.3",
+  "version": "0.0.13",
   "private": false,
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "@tonclient/core": "^1.24.0",

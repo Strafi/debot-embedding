@@ -2,6 +2,7 @@ import React, { useState, FC, ChangeEvent, DragEvent, KeyboardEvent } from 'reac
 import { useSelector } from '/src/store/hooks';
 import { genKeyPairFromMnemonic } from '/src/helpers';
 import Modal from '../Modal';
+import uploadKeysImage from '/src/assets/uploadKeys.jpg';
 import './index.scss';
 
 const SigningBox: FC = () => {
@@ -108,7 +109,7 @@ const SigningBox: FC = () => {
 				<input type="file" id="upload-input" hidden />
 				<label htmlFor="upload-input">
 					<img
-						src='/uploadKeys.jpg'
+						src={uploadKeysImage}
 						alt='Click here to upload'
 					/>
 					Upload keypair file

@@ -50,11 +50,11 @@
 	position: relative;
 	width: 100%;
 	height: 100%;
-	padding: 0 $app-side-padding $app-top-padding;
 	font-family: Montserrat, Roboto, Arial, sans-serif;
 	overflow-x: hidden;
 	scroll-behavior: smooth;
 	box-sizing: border-box;
+	background-color: var(--background-color);
 
 	&--scroll-disabled {
 		overflow: hidden;
@@ -67,6 +67,7 @@
 		width: 100%;
 		max-width: $main-wrapper-max-width;
 		margin: 0 auto;
+		padding: 0 $app-side-padding $app-top-padding;
 	}
 
 	* {

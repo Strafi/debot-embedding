@@ -1,4 +1,8 @@
 import React, { FC } from 'react';
+
+import loaderGif from '/src/assets/loader.gif';
+import loadFailedImage from '/src/assets/load-failed.png';
+
 import './index.scss';
 
 type TProps = {
@@ -6,7 +10,7 @@ type TProps = {
 }
 
 const Loader: FC<TProps> = ({ isFailed }) => {
-	const imgSrc = isFailed ? '/load-failed.png' : '/loader.gif';
+	const imgSrc = isFailed ? loadFailedImage : loaderGif;
 	const imgAlt = isFailed ? 'Nothing here :(' : 'Loading...';
 
 	return (

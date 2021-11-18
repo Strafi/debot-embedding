@@ -20,6 +20,8 @@ window.customElements.define("standalone-debot", reactToWebComponent(StandaloneD
 window.customElements.define("standalone-debot-events", reactToWebComponent(StandaloneDebotEvents, React, ReactDOM) as any);
 
 declare global {
+	const __LIB_VERSION__: string;
+
     interface Window {
 		DEBOT_EMBEDDING: {
 			EventBus: IEventBus,

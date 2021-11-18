@@ -6,8 +6,7 @@
 	position: sticky;
 	top: 0;
 	display: flex;
-	padding-top: $app-top-padding;
-	padding-bottom: 10px;
+	padding: $app-top-padding $app-side-padding 10px;
 	margin-bottom: $header-margin;
 	background-color: var(--background-color);
 

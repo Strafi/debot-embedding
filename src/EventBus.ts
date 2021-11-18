@@ -41,7 +41,7 @@ export interface IEventBus {
 	register(event: string, callback: Function): IRegistry;
 }
 
-class EventBus implements IEventBus {
+export class EventBus implements IEventBus {
 	private subscribers: ISubscriber;
 	private nextId = 0;
   

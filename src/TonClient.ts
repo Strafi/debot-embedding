@@ -1,6 +1,12 @@
 import { TonClient } from '@tonclient/core';
-import { libWeb } from '@tonclient/lib-web';
+import { libWeb, libWebSetup } from '@tonclient/lib-web';
+
+import { getStaticAssetUrl } from '/src/helpers';
 import { TON_NETWORK_LS_FIELD, MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK } from '/src/constants';
+
+libWebSetup({
+	binaryURL: getStaticAssetUrl('tonclient.wasm'),
+});
 
 //@ts-ignore
 TonClient.useBinaryLibrary(libWeb);
