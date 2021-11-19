@@ -1,0 +1,28 @@
+@import '../../../../../../styles/colors.scss';
+
+.stage-component {
+	&__qr-code-send {
+		position: relative;
+		width: 60%;
+		max-width: 320px;
+		min-width: 260px;
+		margin-bottom: 20px;
+
+		&-banner {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 10;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			padding: 0 20px;
+			text-align: center;
+			font-size: 14px;
+			color: $white;
+			background-color: rgba($black, .75);
+		}
+	}
+}

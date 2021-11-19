@@ -40,7 +40,7 @@ class Userinfo extends BaseInterface {
 		const interfaceAddress = interfaceIdToAddress(this.id);
 
 		try {
-			await DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { value: signingBoxHandle });
+			await DEngine.callDebotFunction(debotAddress, interfaceAddress, answerId, { handle: signingBoxHandle });
 		} catch(err) {
 			console.error((err as Error).message);
 		}

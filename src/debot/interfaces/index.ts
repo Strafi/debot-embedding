@@ -9,6 +9,8 @@ import Echo from './echo';
 import Stdout from './stdout';
 import Userinfo from './userinfo';
 import SigningBoxInput from './signing_box_input';
+import Network from './network';
+import QrCode from './qr_code';
 import { IDebotInterfaceParams } from '../types';
 import { IBaseInterface } from './base';
 
@@ -32,6 +34,8 @@ class InterfacesController implements IInterfacesController {
 		const userinfo = new Userinfo();
 		const media = new Media();
 		const signingBoxInput = new SigningBoxInput();
+		const network = new Network();
+		const qrCode = new QrCode();
 
 		this.state = new Map([
 			[terminal.id, terminal as IBaseInterface],
@@ -45,6 +49,8 @@ class InterfacesController implements IInterfacesController {
 			[stdout.id, stdout],
 			[userinfo.id, userinfo],
 			[signingBoxInput.id, signingBoxInput],
+			[network.id, network],
+			[qrCode.id, qrCode],
 		]);
 	}
 

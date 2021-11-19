@@ -15,6 +15,7 @@ import {
 	TokensInput,
 	Menu,
 	Media,
+	QrCodeScan,
 } from './StageComponents';
 
 import './index.scss';
@@ -30,6 +31,7 @@ const bindedComponents = {
 	[COMPONENTS_BINDINGS.STDOUT]: Stdout,
 	[COMPONENTS_BINDINGS.MENU]: Menu,
 	[COMPONENTS_BINDINGS.MEDIA]: Media,
+	[COMPONENTS_BINDINGS.QR_CODE.SCAN]: QrCodeScan,
 };
 
 type TProps = {

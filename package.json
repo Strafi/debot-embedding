@@ -1,16 +1,18 @@
 {
   "name": "debot-web-embedding",
-  "version": "0.0.13",
+  "version": "0.1.1",
   "private": false,
-  "author": "",
+  "author": "Anton Solodkov <anton.solodkof@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@tonclient/core": "^1.24.0",
     "@tonclient/lib-web": "^1.24.0",
+    "axios": "^0.24.0",
     "history": "^5.0.0",
     "react": "^17.0.1",
     "react-device-detect": "^2.1.2",
     "react-dom": "^17.0.1",
+    "react-qr-reader": "^2.2.1",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-to-webcomponent": "^1.5.1",
@@ -45,6 +47,7 @@
   "bugs": {
     "url": "https://github.com/Strafi/debot-embedding/issues"
   },
+  "description": "Everscale (ex. Free TON) Debot Web Embedding",
   "homepage": "https://github.com/Strafi/debot-embedding",
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.0",
@@ -52,6 +55,7 @@
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
+    "@types/react-qr-reader": "^2.1.4",
     "@types/react-redux": "^7.1.20",
     "@types/react-router-dom": "^5.3.2",
     "@types/redux": "^3.6.0",

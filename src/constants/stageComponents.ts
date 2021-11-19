@@ -9,6 +9,9 @@ export const COMPONENTS_BINDINGS = {
 	MENU: 'Menu',
 	STDOUT: 'Stdout',
 	MEDIA: 'Media',
+	QR_CODE: {
+		SCAN: 'QR_CODE_SCAN',
+	},
 }
 
 export const MEDIA_STATUS = {
