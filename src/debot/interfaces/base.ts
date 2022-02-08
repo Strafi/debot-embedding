@@ -5,16 +5,14 @@ import { EVENTS } from '/src/constants/events';
 import { IDebotInterfaceParams, TExtendedDebotInterfaceParams } from '../types';
 
 export interface IBaseInterface {
-	id: string,
 	call: (params: IDebotInterfaceParams) => Promise<void>
 }
 
 abstract class BaseInterface implements IBaseInterface {
-	id: string;
+	static id: string;
 	protected abi: AbiContract;
 
-	constructor(id: string, abi: AbiContract) {
-		this.id = id;
+	constructor(abi: AbiContract) {
 		this.abi = abi;
 	}
 
@@ -45,7 +43,7 @@ abstract class BaseInterface implements IBaseInterface {
 			console.error('Interface execution failed: ', err);
 
 			EventBus.dispatch(EVENTS.DEBOT.FUNCTION_EXECUTION_FAILED, {
-				interfaceId: this.id,
+				interfaceId: BaseInterface.id,
 				debotAddress: params.debotAddress,
 				data: { params, message: (err as Error).message },
 			});
@@ -56,7 +54,7 @@ abstract class BaseInterface implements IBaseInterface {
 		const { value: { answerId }, debotAddress } = params;
 
 		EventBus.dispatch(EVENTS.DEBOT.FUNCTION_CALLED, {
-			interfaceId: this.id,
+			interfaceId: BaseInterface.id,
 			debotAddress,
 			functionId: answerId,
 			data: params,

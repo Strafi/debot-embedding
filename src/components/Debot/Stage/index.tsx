@@ -6,7 +6,6 @@ import { Loader } from '/src/components';
 import { AppComponentRefContext } from '/src/contexts';
 import {
 	Text,
-	Stdout,
 	Input,
 	AddressInput,
 	Textarea,
@@ -28,7 +27,6 @@ const bindedComponents = {
 	[COMPONENTS_BINDINGS.ADDRESS_INPUT]: AddressInput,
 	[COMPONENTS_BINDINGS.TOKENS_INPUT]: TokensInput,
 	[COMPONENTS_BINDINGS.TEXT]: Text,
-	[COMPONENTS_BINDINGS.STDOUT]: Stdout,
 	[COMPONENTS_BINDINGS.MENU]: Menu,
 	[COMPONENTS_BINDINGS.MEDIA]: Media,
 	[COMPONENTS_BINDINGS.QR_CODE.SCAN]: QrCodeScan,

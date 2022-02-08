@@ -7,7 +7,6 @@ export const COMPONENTS_BINDINGS = {
 	ADDRESS_INPUT: 'AddressInput',
 	TOKENS_INPUT: 'TokensInput',
 	MENU: 'Menu',
-	STDOUT: 'Stdout',
 	MEDIA: 'Media',
 	QR_CODE: {
 		SCAN: 'QR_CODE_SCAN',

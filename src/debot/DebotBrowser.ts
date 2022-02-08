@@ -65,6 +65,7 @@ class DebotBrowser implements IDebotBrowser {
 			InterfacesController.delegateToInterface(interfaceId, {
 				debotAddress,
 				signingBoxHandle,
+				abiVersion: this.info?.dabiVersion,
 				...params,
 			});
 		}
@@ -144,6 +145,7 @@ class DebotBrowser implements IDebotBrowser {
 					InterfacesController.delegateToInterface(interfaceId, {
 						debotAddress: src,
 						signingBoxHandle: this.signingBoxHandle!,
+						abiVersion: this.info?.dabiVersion,
 						...params,
 					});
 				}

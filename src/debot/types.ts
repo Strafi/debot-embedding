@@ -50,6 +50,7 @@ export type TInterfacesQueueItem = {
 export interface IDebotInterfaceParams extends ParamsOfAppDebotBrowserSend {
 	debotAddress: string,
 	signingBoxHandle: RegisteredSigningBox['handle'],
+	abiVersion?: string,
 }
 
 export type TExtendedDebotInterfaceParams = IDebotInterfaceParams & DecodedMessageBody

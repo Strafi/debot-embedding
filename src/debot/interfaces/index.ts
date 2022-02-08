@@ -1,64 +1,35 @@
-import Terminal from './terminal';
-import Media from './media';
-import Menu from './menu';
-import AmountInput from './amount_input';
-import ConfirmInput from './confirm_input';
-import AddressInput from './address_input';
-import NumberInput from './number_input';
-import Echo from './echo';
-import Stdout from './stdout';
-import Userinfo from './userinfo';
-import SigningBoxInput from './signing_box_input';
-import Network from './network';
-import QrCode from './qr_code';
+import * as interfaces_20 from './2.0_interfaces';
+import * as interfaces_22 from './2.2_interfaces';
+import { DEBOT_INTERFACE_ID } from '/src/constants/debot';
 import { IDebotInterfaceParams } from '../types';
-import { IBaseInterface } from './base';
 
 interface IInterfacesController {
 	checkAreInterfacesSupported: (interfaces: string[]) => boolean;
 	delegateToInterface: (interfaceId: string, params: IDebotInterfaceParams) => void;
 }
 
+const DEFAULT_ABI_VERSION = '2.0';
+
+const InterfaceIdsBindings = {
+	[DEBOT_INTERFACE_ID.ADDRESS_INPUT]: 'AddressInput',
+	[DEBOT_INTERFACE_ID.AMOUNT_INPUT]: 'AmountInput',
+	[DEBOT_INTERFACE_ID.CONFIRM_INPUT]: 'ConfirmInput',
+	[DEBOT_INTERFACE_ID.MEDIA]: 'Media',
+	[DEBOT_INTERFACE_ID.MENU]: 'Menu',
+	[DEBOT_INTERFACE_ID.NETWORK]: 'Network',
+	[DEBOT_INTERFACE_ID.NUMBER_INPUT]: 'NumberInput',
+	[DEBOT_INTERFACE_ID.QR_CODE]: 'QrCode',
+	[DEBOT_INTERFACE_ID.SIGNING_BOX_INPUT]: 'SigningBoxInput',
+	[DEBOT_INTERFACE_ID.TERMINAL]: 'Terminal',
+	[DEBOT_INTERFACE_ID.USERINFO]: 'Userinfo',
+}
+
 class InterfacesController implements IInterfacesController {
-	private state: Map<string, IBaseInterface>;
-
-	constructor() {
-		const terminal = new Terminal();
-		const menu = new Menu();
-		const amountInput = new AmountInput();
-		const confirmInput = new ConfirmInput();
-		const addressInput = new AddressInput();
-		const numberInput = new NumberInput();
-		const echo = new Echo();
-		const stdout = new Stdout();
-		const userinfo = new Userinfo();
-		const media = new Media();
-		const signingBoxInput = new SigningBoxInput();
-		const network = new Network();
-		const qrCode = new QrCode();
-
-		this.state = new Map([
-			[terminal.id, terminal as IBaseInterface],
-			[media.id, media],
-			[menu.id, menu],
-			[amountInput.id, amountInput],
-			[confirmInput.id, confirmInput],
-			[addressInput.id, addressInput],
-			[numberInput.id, numberInput],
-			[echo.id, echo],
-			[stdout.id, stdout],
-			[userinfo.id, userinfo],
-			[signingBoxInput.id, signingBoxInput],
-			[network.id, network],
-			[qrCode.id, qrCode],
-		]);
-	}
-
 	checkAreInterfacesSupported(interfaces: string[]): boolean {
 		for (const interfaceAddress of interfaces) {
 			const interfaceId = interfaceAddress.slice(2);
 
-			if (!this.state.has(interfaceId))
+			if (!InterfaceIdsBindings[interfaceId])
 				return false;
 		}
 
@@ -66,7 +37,16 @@ class InterfacesController implements IInterfacesController {
 	}
 
 	delegateToInterface(interfaceId: string, params: IDebotInterfaceParams) {
-		const _interface = this.state.get(interfaceId);
+		const abiVersion = params.abiVersion || DEFAULT_ABI_VERSION;
+		const interfaces = abiVersion === DEFAULT_ABI_VERSION
+			? interfaces_20
+			: interfaces_22;
+
+		//@ts-ignore
+		const Interface = interfaces[InterfaceIdsBindings[interfaceId]];
+		const _interface = new Interface();
+
+		console.log(_interface);
 
 		console.log(`Calling ${_interface?.constructor?.name} by id: ${interfaceId}`);
 
