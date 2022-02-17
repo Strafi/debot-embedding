@@ -1,4 +1,4 @@
-# Everscale (ex. Free TON) DeBot Web Embedding
+# Everscale DeBot Web Embedding
 ## Motivation
 The usage of traditional web is still massive and we can only dream of the Web Free
 concept becoming reality. We already have DeBots which provide users direct
