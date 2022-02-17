@@ -4,7 +4,7 @@ import { addLocalDebot } from '/src/helpers';
 import { ControlWithPopupContext } from '/src/contexts';
 import { OptionsList } from '/src/components';
 import { MainNetIcon, DevNetIcon, FldNetIcon, NetworkIcon } from '/src/components/icons';
-import { MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK } from '/src/constants';
+import { MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK, CUSTOM_NETWORKS_LS_FIELD } from '/src/constants';
 import './index.scss';
 
 type TProps = {
@@ -56,7 +56,26 @@ const AddDebot: FC<TProps> = ({ prefilledAddress = '' }) => {
 			<NetworkIcon network={selectedNetwork} />
 			{selectedNetwork}
 		</div>
-	)
+	);
+
+	const renderCustomNetworks = () => {
+		const customNetworks = JSON.parse(localStorage.getItem(CUSTOM_NETWORKS_LS_FIELD)!);
+
+		if (!customNetworks)
+			return null;
+
+		const customNetworksOutput = customNetworks.map((network: string) => (
+			<div
+				className='options-list__list-item'
+				onClick={() => setSelectedNetwork(network)}
+				key={network}
+			>
+				{network}
+			</div>
+		));
+
+		return customNetworksOutput;
+	};
 
 	return (
 		<div className='add-debot'>
@@ -93,6 +112,7 @@ const AddDebot: FC<TProps> = ({ prefilledAddress = '' }) => {
 						<FldNetIcon />
 						{FLD_NETWORK}
 					</div>
+					{renderCustomNetworks()}
 				</OptionsList>
 			</div>
 			<div className='add-debot__input-container'>

@@ -16,8 +16,10 @@ const NetworkIcon: FC<TProps> = ({ className, network }) => {
 
 	if (network === MAIN_NETWORK)
 		return <MainNetIcon className={className} />
+
+	const firstLetter = network?.toUpperCase()[0];
 	
-	return <></>;
+	return <span className='network-icon-letter'>{firstLetter}</span>;
 }
 
 export default NetworkIcon;

@@ -31,7 +31,7 @@ const OptionsList: FC<TProps> = ({ children, selectedItem, height = DEFAULT_HEIG
 
 	const listClassName = `options-list__list ${isListOpen
 		? 'options-list__list--visible' : ''
-	}`;
+	} with-custom-scrollbar`;
 
 	const switcherBlockClassName = `options-list ${isListOpen
 		? 'options-list--active' : ''

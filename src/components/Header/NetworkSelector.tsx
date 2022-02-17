@@ -4,7 +4,8 @@ import { useRouteMatch } from 'react-router-dom';
 import TonClient from '/src/TonClient';
 import {  MainNetIcon, DevNetIcon, FldNetIcon, NetworkIcon } from '/src/components/icons';
 import { OptionsList } from '/src/components';
-import { MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK } from '/src/constants';
+import AddCustomNetwork from './AddCustomNetwork';
+import { MAIN_NETWORK, DEV_NETWORK, FLD_NETWORK, CUSTOM_NETWORKS_LS_FIELD } from '/src/constants';
 import './index.scss';
 
 const HeaderNetworkSelector: FC = () => {
@@ -26,8 +27,27 @@ const HeaderNetworkSelector: FC = () => {
 		</div>
 	);
 
+	const renderCustomNetworks = () => {
+		const customNetworks = JSON.parse(localStorage.getItem(CUSTOM_NETWORKS_LS_FIELD)!);
+
+		if (!customNetworks)
+			return null;
+
+		const customNetworksOutput = customNetworks.map((network: string) => (
+			<div
+				className='options-list__list-item'
+				onClick={() => handleSelectNetwork(network)}
+				key={network}
+			>
+				{network}
+			</div>
+		));
+
+		return customNetworksOutput;
+	};
+
 	return (
-		<OptionsList selectedItem={renderSelectedNetwork()} height={126} width={200} isDisabled={!!match}>
+		<OptionsList selectedItem={renderSelectedNetwork()} height={168} width={200} isDisabled={!!match}>
 			<div
 				className='options-list__list-item'
 				onClick={() => handleSelectNetwork(MAIN_NETWORK)}
@@ -49,6 +69,8 @@ const HeaderNetworkSelector: FC = () => {
 				<FldNetIcon />
 				{FLD_NETWORK}
 			</div>
+			{renderCustomNetworks()}
+			<AddCustomNetwork handleSelectNetwork={handleSelectNetwork} />
 		</OptionsList>
 	);
 }

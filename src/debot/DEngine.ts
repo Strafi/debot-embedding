@@ -25,9 +25,7 @@ interface IDEngine {
 
 class DEngine implements IDEngine {
 	storage = new Map<string, IDEngineStorageItem>();
-	private mainDebotModule = new DebotModule(TonClient.mainNetClient);
-	private devDebotModule = new DebotModule(TonClient.devNetClient);
-	private fldDebotModule = new DebotModule(TonClient.fldNetClient);
+	private modulesMap = new Map<string, DebotModule>();
 
 	constructor() {
 		EventBus.register(EVENTS.CLIENT.EXECUTE_FUNCTION, (args: TDebotDispatchType) => {
@@ -54,13 +52,17 @@ class DEngine implements IDEngine {
 	}
 
 	get debotModule() {
-		if (TonClient.selectedNetwork === DEV_NETWORK)
-			return this.devDebotModule;
+		const module = this.modulesMap.get(TonClient.selectedNetwork);
 
-		if (TonClient.selectedNetwork === FLD_NETWORK)
-			return this.fldDebotModule;
+		if (!module) {
+			const newModule = new DebotModule(TonClient.client);
 
-		return this.mainDebotModule;
+			this.modulesMap.set(TonClient.selectedNetwork, newModule);
+
+			return newModule;
+		}
+
+		return module;
 	}
 
 	async initDebot(address: string): Promise<RegisteredDebot> {
