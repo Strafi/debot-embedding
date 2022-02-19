@@ -1,4 +1,4 @@
-import { DebotModule, RegisteredDebot, CallSet } from '@tonclient/core';
+import { DebotModule, RegisteredDebot, CallSet } from '@eversdk/core';
 
 import store from '/src/store';
 import EventBus, { TDebotDispatchType } from '/src/EventBus';

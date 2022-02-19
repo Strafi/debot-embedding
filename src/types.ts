@@ -1,4 +1,4 @@
-import { DebotActivity } from '@tonclient/core';
+import { DebotActivity } from '@eversdk/core';
 
 export * from './EventBus'
 export type { encodeString, decodeString } from './helpers'

@@ -1,4 +1,4 @@
-import { RegisteredSigningBox, DebotAction, SigningBoxHandle, DebotActivity, RegisteredDebot, AppDebotBrowser, DecodedMessageBody } from '@tonclient/core';
+import { RegisteredSigningBox, DebotAction, SigningBoxHandle, DebotActivity, RegisteredDebot, AppDebotBrowser, DecodedMessageBody } from '@eversdk/core';
 
 export interface IDebotBrowser extends AppDebotBrowser {
 	debot_handle: RegisteredDebot['debot_handle'] | undefined;

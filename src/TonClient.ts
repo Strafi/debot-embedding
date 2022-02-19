@@ -1,11 +1,11 @@
-import { TonClient } from '@tonclient/core';
-import { libWeb, libWebSetup } from '@tonclient/lib-web';
+import { TonClient } from '@eversdk/core';
+import { libWeb, libWebSetup } from '@eversdk/lib-web';
 
 import { getStaticAssetUrl } from '/src/helpers';
 import { TON_NETWORK_LS_FIELD, MAIN_NETWORK } from '/src/constants';
 
 libWebSetup({
-	binaryURL: getStaticAssetUrl('tonclient.wasm'),
+	binaryURL: getStaticAssetUrl('eversdk.wasm'),
 });
 
 //@ts-ignore

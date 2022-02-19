@@ -2,7 +2,7 @@ import {
 	RegisteredDebot,
 	RegisteredSigningBox,
 	KeyPair,
-} from '@tonclient/core';
+} from '@eversdk/core';
 import { hasTonProvider } from 'ton-inpage-provider';
 import { isMobile } from 'react-device-detect';
 

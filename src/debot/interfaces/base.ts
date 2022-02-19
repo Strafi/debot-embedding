@@ -1,4 +1,4 @@
-import { AbiContract } from '@tonclient/core';
+import { AbiContract } from '@eversdk/core';
 import TonClient from '/src/TonClient';
 import EventBus from '/src/EventBus';
 import { EVENTS } from '/src/constants/events';
